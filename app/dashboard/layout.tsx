@@ -3,15 +3,27 @@ import DashboardNavigation from "../components/dashboard/DashboardNavigation";
 import { Sheet, SheetContent, SheetTrigger } from "../components/ui/sheet";
 import { Button } from "../components/ui/button";
 import { CircleUser, MenuIcon } from "lucide-react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../components/ui/dropdown-menu";
-import { getKindeServerSession, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/server";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "../components/ui/dropdown-menu";
+import {
+    getKindeServerSession,
+    LogoutLink,
+} from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 
-
-
-export default async function DashboardLayout({ children }: { children: ReactNode }) {
-    const {getUser} = getKindeServerSession()
-    const user = await getUser()
+export default async function DashboardLayout({
+    children,
+}: {
+    children: ReactNode;
+}) {
+    const { getUser } = getKindeServerSession();
+    const user = await getUser();
 
     if (!user || user.id !== "kp_c1eaeaf06ad04886870c4f0a12e182d1") {
         return redirect("/");
@@ -58,7 +70,7 @@ export default async function DashboardLayout({ children }: { children: ReactNod
                     </DropdownMenuContent>
                 </DropdownMenu>
             </header>
-            {children}
+            <main className="my-5">{children}</main>
         </div>
     );
 }

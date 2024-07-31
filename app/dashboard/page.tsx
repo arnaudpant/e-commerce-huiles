@@ -1,7 +1,133 @@
+import {
+    DollarSign,
+    Euro,
+    PartyPopper,
+    ShoppingBag,
+    User2,
+} from "lucide-react";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "../components/ui/card";
+import { Avatar, AvatarFallback } from "../components/ui/avatar";
+
 export default function Dasboard() {
     return (
         <div>
-            <h1>Dashboard content</h1>
+            <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
+                <Card>
+                    <CardHeader className="flex flex-row items-center justify-between pb-2">
+                        <CardTitle>Revenus totaux</CardTitle>
+                        <Euro className="h-4 w-4 text-green-600" />
+                    </CardHeader>
+                    <CardContent>
+                        <p className="text-2xl font-bold">1000 €</p>
+                        <p className="text-xs text-muted-foreground">
+                            Basé sur 25 commandes
+                        </p>
+                    </CardContent>
+                </Card>
+
+                <Card>
+                    <CardHeader className="flex flex-row items-center justify-between pb-2">
+                        <CardTitle>Total des ventes</CardTitle>
+                        <ShoppingBag className="h-4 w-4 text-blue-600" />
+                    </CardHeader>
+                    <CardContent>
+                        <p className="text-2xl font-bold">+50</p>
+                        <p className="text-xs text-muted-foreground">
+                            Total des ventes sur HuilesVak
+                        </p>
+                    </CardContent>
+                </Card>
+
+                <Card>
+                    <CardHeader className="flex flex-row items-center justify-between pb-2">
+                        <CardTitle>Produits</CardTitle>
+                        <PartyPopper className="h-4 w-4 text-indigo-600" />
+                    </CardHeader>
+                    <CardContent>
+                        <p className="text-2xl font-bold">20</p>
+                        <p className="text-xs text-muted-foreground">
+                            Nombre de produits créés
+                        </p>
+                    </CardContent>
+                </Card>
+
+                <Card>
+                    <CardHeader className="flex flex-row items-center justify-between pb-2">
+                        <CardTitle>Total clients</CardTitle>
+                        <User2 className="h-4 w-4 text-orange-600" />
+                    </CardHeader>
+                    <CardContent>
+                        <p className="text-2xl font-bold">11</p>
+                        <p className="text-xs text-muted-foreground">
+                            Nombre de clients
+                        </p>
+                    </CardContent>
+                </Card>
+            </div>
+
+            <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3 mt-10">
+                <Card className="xl:col-span-2">
+                    <CardHeader className="flex flex-row items-center justify-between pb-2">
+                        <CardTitle>Transactions</CardTitle>
+                        <CardDescription>
+                            Transactions récentes de votre boutique
+                        </CardDescription>
+                    </CardHeader>
+                </Card>
+                <Card>
+                    <CardHeader className="flex flex-row items-center justify-between pb-2">
+                        <CardTitle>Ventes récentes</CardTitle>
+                    </CardHeader>
+                    <CardContent className="flex flex-col gap-8">
+                        <div className="flex items-center gap-4">
+                            <Avatar className="hidden sm:flex h-9 w-9">
+                                <AvatarFallback>JD</AvatarFallback>
+                            </Avatar>
+                            <div className="grid gap-1">
+                                <p className="text-sm font-medium">John DOE</p>
+                                <p className="text-sm to-muted-foreground">
+                                    test@test.fr
+                                </p>
+                            </div>
+                            <p className="ml-auto font-medium">35€</p>
+                        </div>
+                    </CardContent>
+                    <CardContent className="flex flex-col gap-8">
+                        <div className="flex items-center gap-4">
+                            <Avatar className="hidden sm:flex h-9 w-9">
+                                <AvatarFallback>JD</AvatarFallback>
+                            </Avatar>
+                            <div className="grid gap-1">
+                                <p className="text-sm font-medium">John DOE</p>
+                                <p className="text-sm to-muted-foreground">
+                                    test@test.fr
+                                </p>
+                            </div>
+                            <p className="ml-auto font-medium">35€</p>
+                        </div>
+                    </CardContent>
+                    <CardContent className="flex flex-col gap-8">
+                        <div className="flex items-center gap-4">
+                            <Avatar className="hidden sm:flex h-9 w-9">
+                                <AvatarFallback>JD</AvatarFallback>
+                            </Avatar>
+                            <div className="grid gap-1">
+                                <p className="text-sm font-medium">John DOE</p>
+                                <p className="text-sm to-muted-foreground">
+                                    test@test.fr
+                                </p>
+                            </div>
+                            <p className="ml-auto font-medium">35€</p>
+                        </div>
+                    </CardContent>
+                </Card>
+            </div>
         </div>
-    )
+    );
 }

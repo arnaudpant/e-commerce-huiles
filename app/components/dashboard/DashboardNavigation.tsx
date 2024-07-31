@@ -3,19 +3,19 @@ import Link from "next/link";
 const links = [
     {
         name: "Dashboard",
-        href: "/dasboard",
+        href: "/dashboard",
     },
     {
         name: "Orders",
-        href: "/dasboard/orders",
+        href: "/dashboard/orders",
     },
     {
         name: "Products",
-        href: "/dasboard/products",
+        href: "/dashboard/products",
     },
     {
         name: "Categories",
-        href: "/dasboard/categories",
+        href: "/dashboard/categories",
     },
 ];
 
