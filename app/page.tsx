@@ -6,7 +6,7 @@ import {
 
 export default function Home() {
     return (
-        <div>
+        <div className="flex gap-4 m-4">
             <Button asChild>
                 <LoginLink>Connexion</LoginLink>
             </Button>

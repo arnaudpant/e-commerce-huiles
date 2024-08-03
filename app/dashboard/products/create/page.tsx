@@ -4,6 +4,7 @@ import {
     Card,
     CardContent,
     CardDescription,
+    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/app/components/ui/card";
@@ -98,6 +99,9 @@ export default function ProductCreateRoute() {
                         </div>
                     </div>
                 </CardContent>
+                <CardFooter>
+                    <Button>Créer un produit</Button>
+                </CardFooter>
             </Card>
         </form>
     );

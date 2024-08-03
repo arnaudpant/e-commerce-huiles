@@ -51,7 +51,7 @@ export default function Products() {
                         <TableBody>
                             <TableRow>
                                 <TableCell>
-                                    <UserIcon w-16 h-16/>
+                                    <UserIcon className="w-16 h-16"/>
                                 </TableCell>
                                 <TableCell>Huile vierge de noix</TableCell>
                                 <TableCell>En stock</TableCell>
