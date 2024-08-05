@@ -20,6 +20,45 @@ model User {
   lastName String
   profileImage String
   adresse String
+  phone String
+  createdAt DateTime @default(now())
+}
+
+model Product {
+  id String @id @default(uuid())
+  name String
+  description String
+  information String
+  composition String
+  utilisation String
+  status ProductStatus
+  price50 Int
+  price100 Int
+  price250 Int
+  images String[]
+  category Category
+  stock Int
+  format FormatBottle[]
 
   createdAt DateTime @default(now())
+}
+
+enum ProductStatus {
+  draft
+  published
+  archived
+}
+
+enum Category {
+  huileVegetale
+  graisseVegetalePure
+  huileVegetaleComposee
+  huileAromatique
+  huileEssentielle
+}
+
+enum FormatBottle {
+  ml50
+  ml100
+  ml250
 }
