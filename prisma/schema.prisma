@@ -37,7 +37,7 @@ model Product {
   price250 Int
   images String[]
   category Category
-  stock Int
+  stock Boolean @default(false)
   format FormatBottle[]
 
   createdAt DateTime @default(now())
