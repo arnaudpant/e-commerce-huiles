@@ -4,6 +4,8 @@ import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
 import { parseWithZod } from "@conform-to/zod"
 import { productSchema } from "./lib/zodSchemas";
+import prisma from "./lib/db";
+
 
 export async function createProduct(prevState: unknown, formData: FormData) {
     const { getUser } = getKindeServerSession();
@@ -17,7 +19,28 @@ export async function createProduct(prevState: unknown, formData: FormData) {
         schema: productSchema
     })
 
-    if(submission.status !== "success") {
+    if (submission.status !== "success") {
         return submission.reply()
     }
+
+    const flatUrlsImages = submission.value.images.flatMap((urlString) => urlString.split(",").map((url) => url.trim()))
+
+    await prisma.product.create({
+        data: {
+            name: submission.value.name,
+            description: submission.value.description,
+            information: submission.value.information,
+            composition: submission.value.composition,
+            utilisation: submission.value.utilisation,
+            status: submission.value.status,
+            price50: submission.value.price50,
+            price100: submission.value.price100,
+            price250: submission.value.price250 ?? 0,
+            images: flatUrlsImages,
+            category: submission.value.category,
+            stock: submission.value.stock,
+        }
+    })
+
+    redirect("/dashboard/products")
 } 

@@ -30,6 +30,8 @@ import { parseWithZod } from "@conform-to/zod";
 import { productSchema } from "@/app/lib/zodSchemas";
 import { useState } from "react";
 import Image from "next/image";
+import { categories } from "@/app/lib/categories";
+import { SubmitButtons } from "@/app/components/SubmitButtons";
 
 export default function ProductCreateRoute() {
     const [images, setImages] = useState<string[]>([]);
@@ -44,6 +46,10 @@ export default function ProductCreateRoute() {
         shouldValidate: "onBlur",
         shouldRevalidate: "onInput",
     });
+
+    const handleDelete = (index: number) => {
+        setImages(images.filter((_, i) => i !== index));
+    };
     return (
         <form id={form.id} onSubmit={form.onSubmit} action={action}>
             <div className="flex items-center gap-4">
@@ -65,6 +71,7 @@ export default function ProductCreateRoute() {
                 </CardHeader>
                 <CardContent>
                     <div className="flex flex-col gap-6">
+                        {/* NOM */}
                         <div className="flex flex-col gap-3">
                             <Label>Nom</Label>
                             <Input
@@ -77,12 +84,12 @@ export default function ProductCreateRoute() {
                             />
                             <p className="text-red-500">{fields.name.errors}</p>
                         </div>
-
+                        {/* DESCRIPTION */}
                         <div className="flex flex-col gap-3">
                             <Label>Description</Label>
                             <Textarea
                                 key={fields.description.key}
-                                name={fields.name.name}
+                                name={fields.description.name}
                                 defaultValue={fields.description.initialValue}
                                 placeholder="Description du produit"
                             />
@@ -90,33 +97,33 @@ export default function ProductCreateRoute() {
                                 {fields.description.errors}
                             </p>
                         </div>
-
+                        {/* CATEGORIES */}
                         <div className="flex flex-col gap-3">
                             <Label>Catégorie</Label>
-                            <Select>
+                            <Select
+                                key={fields.category.key}
+                                name={fields.category.name}
+                                defaultValue={fields.category.initialValue}
+                            >
                                 <SelectTrigger>
                                     <SelectValue placeholder="Selectionner la catégorie"></SelectValue>
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="huileVegetale">
-                                        Huile végétale
-                                    </SelectItem>
-                                    <SelectItem value="graisseVegetalePure">
-                                        Graisse végétale pure
-                                    </SelectItem>
-                                    <SelectItem value="huileVegetaleComposee">
-                                        Huile végétale composée
-                                    </SelectItem>
-                                    <SelectItem value="huileAromatique">
-                                        Huile aromatique
-                                    </SelectItem>
-                                    <SelectItem value="huileEssentielle">
-                                        Huile essentielle
-                                    </SelectItem>
+                                    {categories.map((category) => (
+                                        <SelectItem
+                                            key={category.id}
+                                            value={category.name}
+                                        >
+                                            {category.title}
+                                        </SelectItem>
+                                    ))}
                                 </SelectContent>
                             </Select>
+                            <p className="text-red-500">
+                                {fields.category.errors}
+                            </p>
                         </div>
-
+                        {/* INFORMATIONS */}
                         <div className="flex flex-col gap-3">
                             <Label>Information</Label>
                             <Textarea
@@ -129,7 +136,7 @@ export default function ProductCreateRoute() {
                                 {fields.information.errors}
                             </p>
                         </div>
-
+                        {/* COMPOSITION */}
                         <div className="flex flex-col gap-3">
                             <Label>Composition</Label>
                             <Textarea
@@ -142,7 +149,7 @@ export default function ProductCreateRoute() {
                                 {fields.composition.errors}
                             </p>
                         </div>
-
+                        {/* UTILISATION */}
                         <div className="flex flex-col gap-3">
                             <Label>Utilisation</Label>
                             <Textarea
@@ -155,7 +162,7 @@ export default function ProductCreateRoute() {
                                 {fields.utilisation.errors}
                             </p>
                         </div>
-
+                        {/* PRIX 50ml */}
                         <div className="flex flex-col gap-3">
                             <Label>Prix 50ml</Label>
                             <Input
@@ -170,7 +177,7 @@ export default function ProductCreateRoute() {
                                 {fields.price50.errors}
                             </p>
                         </div>
-
+                        {/* PRIX 100ml */}
                         <div className="flex flex-col gap-3">
                             <Label>Prix 100ml</Label>
                             <Input
@@ -185,7 +192,7 @@ export default function ProductCreateRoute() {
                                 {fields.price100.errors}
                             </p>
                         </div>
-
+                        {/* PRIX 250ml */}
                         <div className="flex flex-col gap-3">
                             <Label>Prix 250ml</Label>
                             <Input
@@ -200,7 +207,7 @@ export default function ProductCreateRoute() {
                                 {fields.price250.errors}
                             </p>
                         </div>
-
+                        {/* STOCK */}
                         <div className="flex flex-col gap-3">
                             <Label>En stock</Label>
                             <Switch
@@ -209,7 +216,7 @@ export default function ProductCreateRoute() {
                                 defaultValue={fields.stock.initialValue}
                             />
                         </div>
-
+                        {/* STATUS */}
                         <div className="flex flex-col gap-3">
                             <Label>Status de la publication</Label>
                             <Select
@@ -236,9 +243,16 @@ export default function ProductCreateRoute() {
                                 {fields.status.errors}
                             </p>
                         </div>
-
+                        {/* IMAGES */}
                         <div className="flex flex-col gap-3">
                             <Label>Images</Label>
+                            <input
+                                type="hidden"
+                                value={images}
+                                key={fields.images.key}
+                                name={fields.images.name}
+                                defaultValue={fields.images.initialValue as any}
+                            />
                             {images.length > 0 ? (
                                 <div className="flex gap-5">
                                     {images.map((img, index) => (
@@ -253,8 +267,14 @@ export default function ProductCreateRoute() {
                                                 width={100}
                                                 className="w-full h-full object-cover border"
                                             />
-                                            <button className="absolute -top-3 -right-3 bg-red-500 rounded-lg">
-                                                <XIcon className="w-3 h-3" />
+                                            <button
+                                                type="button"
+                                                className="absolute -top-3 -right-3 bg-red-500 rounded-lg"
+                                                onClick={() =>
+                                                    handleDelete(index)
+                                                }
+                                            >
+                                                <XIcon className="w-6 h-6" />
                                             </button>
                                         </div>
                                     ))}
@@ -271,11 +291,14 @@ export default function ProductCreateRoute() {
                                     }}
                                 />
                             )}
+                            <p className="text-red-500">
+                                {fields.images.errors}
+                            </p>
                         </div>
                     </div>
                 </CardContent>
-                <CardFooter>
-                    <Button>Créer un produit</Button>
+                <CardFooter className="flex justify-center my-5">
+                    <SubmitButtons /> 
                 </CardFooter>
             </Card>
         </form>

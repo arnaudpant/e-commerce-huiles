@@ -38,7 +38,6 @@ model Product {
   images String[]
   category Category
   stock Boolean @default(false)
-  format FormatBottle[]
 
   createdAt DateTime @default(now())
 }
@@ -55,10 +54,4 @@ enum Category {
   huileVegetaleComposee
   huileAromatique
   huileEssentielle
-}
-
-enum FormatBottle {
-  ml50
-  ml100
-  ml250
 }
