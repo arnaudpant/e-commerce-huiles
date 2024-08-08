@@ -6,7 +6,14 @@ import {
     CardHeader,
     CardTitle,
 } from "@/app/components/ui/card";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/app/components/ui/dropdown-menu";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/app/components/ui/dropdown-menu";
 import {
     Table,
     TableBody,
@@ -15,10 +22,22 @@ import {
     TableHeader,
     TableRow,
 } from "@/app/components/ui/table";
-import { MoreHorizontal, PlusCircle, UserIcon } from "lucide-react";
+import prisma from "@/app/lib/db";
+import { MoreHorizontal, PlusCircle } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
-export default function Products() {
+async function getData() {
+    const data = await prisma.product.findMany({
+        orderBy: {
+            createdAt: "desc",
+        },
+    });
+    return data;
+}
+
+export default async function Products() {
+    const data = await getData();
     return (
         <>
             <div className="flex items-center justify-end">
@@ -38,41 +57,78 @@ export default function Products() {
                     <Table>
                         <TableHeader>
                             <TableRow>
-                                <TableHead>
-                                    Image
-                                </TableHead>
+                                <TableHead>Image</TableHead>
                                 <TableHead>Nom</TableHead>
-                                <TableHead>Status</TableHead>
-                                <TableHead>Prix</TableHead>
+                                <TableHead>Stock</TableHead>
+                                <TableHead>Prix 50ml</TableHead>
+                                <TableHead>Prix 100ml</TableHead>
+                                <TableHead>Prix 250ml</TableHead>
                                 <TableHead>Date</TableHead>
-                                <TableHead className="text-end">Actions</TableHead>
+                                <TableHead>Status</TableHead>
+                                <TableHead className="text-end">
+                                    Actions
+                                </TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            <TableRow>
-                                <TableCell>
-                                    <UserIcon className="w-16 h-16"/>
-                                </TableCell>
-                                <TableCell>Huile vierge de noix</TableCell>
-                                <TableCell>En stock</TableCell>
-                                <TableCell>25 €</TableCell>
-                                <TableCell>10/02/2024</TableCell>
-                                <TableCell className="text-end">
-                                    <DropdownMenu>
-                                        <DropdownMenuTrigger asChild>
-                                            <Button size='icon' variant='ghost'>
-                                                <MoreHorizontal className="h-4 w-4" />
-                                            </Button>
-                                        </DropdownMenuTrigger>
-                                        <DropdownMenuContent align="end">
-                                            <DropdownMenuLabel>Action</DropdownMenuLabel>
-                                            <DropdownMenuSeparator />
-                                            <DropdownMenuItem>Modifier</DropdownMenuItem>
-                                            <DropdownMenuItem>Supprimer</DropdownMenuItem>
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
-                                </TableCell>
-                            </TableRow>
+                            {data.map((item) => (
+                                <TableRow key={item.id}>
+                                    <TableCell>
+                                        <Image
+                                            alt="image produit"
+                                            src={item.images[0]}
+                                            height={64}
+                                            width={64}
+                                            className="rounded-md object-cover h-16 w-16"
+                                        />
+                                    </TableCell>
+                                    <TableCell>{item.name}</TableCell>
+                                    <TableCell>
+                                        {item.stock ? "En stock" : "Epuisé"}
+                                    </TableCell>
+                                    <TableCell>
+                                        {item.price50 !== 0
+                                            ? `${item.price50}€`
+                                            : "X"}
+                                    </TableCell>
+                                    <TableCell>
+                                        {item.price100 !== 0
+                                            ? `${item.price100}€`
+                                            : "X"}
+                                    </TableCell>
+                                    <TableCell>
+                                        {item.price250 !== 0
+                                            ? `${item.price250}€`
+                                            : "X"}
+                                    </TableCell>
+                                    <TableCell>{new Intl.DateTimeFormat("fr-FR").format(item.createdAt)}</TableCell>
+                                    <TableCell>{item.status}</TableCell>
+                                    <TableCell className="text-end">
+                                        <DropdownMenu>
+                                            <DropdownMenuTrigger asChild>
+                                                <Button
+                                                    size="icon"
+                                                    variant="ghost"
+                                                >
+                                                    <MoreHorizontal className="h-4 w-4" />
+                                                </Button>
+                                            </DropdownMenuTrigger>
+                                            <DropdownMenuContent align="end">
+                                                <DropdownMenuLabel>
+                                                    Action
+                                                </DropdownMenuLabel>
+                                                <DropdownMenuSeparator />
+                                                <DropdownMenuItem asChild>
+                                                    <Link href={`/dashboard/products/${item.id}`}>Modifier</Link>
+                                                </DropdownMenuItem>
+                                                <DropdownMenuItem>
+                                                    Supprimer
+                                                </DropdownMenuItem>
+                                            </DropdownMenuContent>
+                                        </DropdownMenu>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
                         </TableBody>
                     </Table>
                 </CardContent>
