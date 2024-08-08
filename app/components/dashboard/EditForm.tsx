@@ -1,14 +1,20 @@
 "use client";
-import { createProduct } from "@/app/actions";
+
+import { categories } from "@/app/lib/categories";
+import { UploadDropzone } from "@/app/lib/uploadthing";
+import { Link, ChevronLeft, XIcon } from "lucide-react";
+import { toast } from "react-toastify";
+import { SubmitButtons } from "@/app/components/SubmitButtons";
 import { Button } from "@/app/components/ui/button";
 import {
     Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
     CardHeader,
     CardTitle,
+    CardDescription,
+    CardContent,
+    CardFooter,
 } from "@/app/components/ui/card";
+import { Textarea } from "@/app/components/ui/textarea";
 import { Input } from "@/app/components/ui/input";
 import { Label } from "@/app/components/ui/label";
 import {
@@ -18,24 +24,36 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/app/components/ui/select";
+import Image from "next/image";
 import { Switch } from "@/app/components/ui/switch";
-import { Textarea } from "@/app/components/ui/textarea";
-import { UploadDropzone } from "@/app/lib/uploadthing";
-import { ChevronLeft, Key, XIcon } from "lucide-react";
-import Link from "next/link";
+import { useState } from "react";
 import { useFormState } from "react-dom";
-import { toast } from "react-toastify";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
+import { createProduct, editProduct } from "@/app/actions";
 import { productSchema } from "@/app/lib/zodSchemas";
-import { useState } from "react";
-import Image from "next/image";
-import { categories } from "@/app/lib/categories";
-import { SubmitButtons } from "@/app/components/SubmitButtons";
 
-export default function ProductCreateRoute() {
-    const [images, setImages] = useState<string[]>([]);
-    const [lastResult, action] = useFormState(createProduct, undefined);
+interface DataProps {
+    data: {
+        id: string;
+        name: string;
+        description: string;
+        information: string;
+        composition: string;
+        utilisation: string;
+        status: "draft" | "published" | "archived";
+        price50: number;
+        price100: number;
+        price250?: number;
+        images: string[];
+        category: "huileVegetale"| "graisseVegetalePure"| "huileVegetaleComposee"| "huileAromatique"| "huileEssentielle";
+        stock: boolean;
+    };
+}
+
+export function EditForm({data}: DataProps) {
+    const [images, setImages] = useState<string[]>(data.images);
+    const [lastResult, action] = useFormState(editProduct, undefined);
     const [form, fields] = useForm({
         lastResult,
 
@@ -52,6 +70,7 @@ export default function ProductCreateRoute() {
     };
     return (
         <form id={form.id} onSubmit={form.onSubmit} action={action}>
+            <input type="hidden" name="productId" value={data.id} />
             <div className="flex items-center gap-4">
                 <Button variant="outline">
                     <Link href="/dashboard/products">
@@ -59,14 +78,14 @@ export default function ProductCreateRoute() {
                     </Link>
                 </Button>
                 <h1 className="text-xl font-semibold tracking-tight">
-                    Nouveau produit
+                    Produit à modifier
                 </h1>
             </div>
             <Card className="mt-5">
                 <CardHeader>
                     <CardTitle>Détails du produit</CardTitle>
                     <CardDescription>
-                        Ici vous pouvez créer votre produit
+                        Ici vous pouvez modifier votre produit
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -78,7 +97,7 @@ export default function ProductCreateRoute() {
                                 type="text"
                                 key={fields.name.key}
                                 name={fields.name.name}
-                                defaultValue={fields.name.initialValue}
+                                defaultValue={data.name}
                                 className="w-full"
                                 placeholder="Nom du produit"
                             />
@@ -90,7 +109,7 @@ export default function ProductCreateRoute() {
                             <Textarea
                                 key={fields.description.key}
                                 name={fields.description.name}
-                                defaultValue={fields.description.initialValue}
+                                defaultValue={data.description}
                                 placeholder="Description du produit"
                             />
                             <p className="text-red-500">
@@ -103,7 +122,7 @@ export default function ProductCreateRoute() {
                             <Select
                                 key={fields.category.key}
                                 name={fields.category.name}
-                                defaultValue={fields.category.initialValue}
+                                defaultValue={data.category}
                             >
                                 <SelectTrigger>
                                     <SelectValue placeholder="Selectionner la catégorie"></SelectValue>
@@ -129,7 +148,7 @@ export default function ProductCreateRoute() {
                             <Textarea
                                 key={fields.information.key}
                                 name={fields.information.name}
-                                defaultValue={fields.information.initialValue}
+                                defaultValue={data.information}
                                 placeholder="Information du produit"
                             />
                             <p className="text-red-500">
@@ -142,7 +161,7 @@ export default function ProductCreateRoute() {
                             <Textarea
                                 key={fields.composition.key}
                                 name={fields.composition.name}
-                                defaultValue={fields.composition.initialValue}
+                                defaultValue={data.composition}
                                 placeholder="Composition du produit"
                             />
                             <p className="text-red-500">
@@ -155,7 +174,7 @@ export default function ProductCreateRoute() {
                             <Textarea
                                 key={fields.utilisation.key}
                                 name={fields.utilisation.name}
-                                defaultValue={fields.utilisation.initialValue}
+                                defaultValue={data.composition}
                                 placeholder="Utilisation du produit"
                             />
                             <p className="text-red-500">
@@ -168,7 +187,7 @@ export default function ProductCreateRoute() {
                             <Input
                                 key={fields.price50.key}
                                 name={fields.price50.name}
-                                defaultValue={fields.price50.initialValue}
+                                defaultValue={data.price50}
                                 type="number"
                                 className="w-full"
                                 placeholder="0€"
@@ -183,7 +202,7 @@ export default function ProductCreateRoute() {
                             <Input
                                 key={fields.price100.key}
                                 name={fields.price100.name}
-                                defaultValue={fields.price50.initialValue}
+                                defaultValue={data.price100}
                                 type="number"
                                 className="w-full"
                                 placeholder="0€"
@@ -198,7 +217,7 @@ export default function ProductCreateRoute() {
                             <Input
                                 key={fields.price250.key}
                                 name={fields.price250.name}
-                                defaultValue={fields.price250.initialValue}
+                                defaultValue={data.price250}
                                 type="number"
                                 className="w-full"
                                 placeholder="0€"
@@ -213,7 +232,7 @@ export default function ProductCreateRoute() {
                             <Switch
                                 key={fields.stock.key}
                                 name={fields.stock.name}
-                                defaultValue={fields.stock.initialValue}
+                                checked={data.stock}
                             />
                         </div>
                         {/* STATUS */}
@@ -222,7 +241,7 @@ export default function ProductCreateRoute() {
                             <Select
                                 key={fields.status.key}
                                 name={fields.status.name}
-                                defaultValue={fields.status.initialValue}
+                                defaultValue={data.status}
                             >
                                 <SelectTrigger>
                                     <SelectValue placeholder="Selectionner le status"></SelectValue>
@@ -298,7 +317,7 @@ export default function ProductCreateRoute() {
                     </div>
                 </CardContent>
                 <CardFooter className="flex justify-center my-5">
-                    <SubmitButtons text="Créer un produit" />
+                    <SubmitButtons text="Modifier" />
                 </CardFooter>
             </Card>
         </form>
