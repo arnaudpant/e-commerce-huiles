@@ -101,7 +101,11 @@ export default async function Products() {
                                             ? `${item.price250}€`
                                             : "X"}
                                     </TableCell>
-                                    <TableCell>{new Intl.DateTimeFormat("fr-FR").format(item.createdAt)}</TableCell>
+                                    <TableCell>
+                                        {new Intl.DateTimeFormat(
+                                            "fr-FR"
+                                        ).format(item.createdAt)}
+                                    </TableCell>
                                     <TableCell>{item.status}</TableCell>
                                     <TableCell className="text-end">
                                         <DropdownMenu>
@@ -119,10 +123,18 @@ export default async function Products() {
                                                 </DropdownMenuLabel>
                                                 <DropdownMenuSeparator />
                                                 <DropdownMenuItem asChild>
-                                                    <Link href={`/dashboard/products/${item.id}`}>Modifier</Link>
+                                                    <Link
+                                                        href={`/dashboard/products/${item.id}`}
+                                                    >
+                                                        Modifier
+                                                    </Link>
                                                 </DropdownMenuItem>
-                                                <DropdownMenuItem>
-                                                    Supprimer
+                                                <DropdownMenuItem asChild>
+                                                    <Link
+                                                        href={`/dashboard/products/${item.id}/delete`}
+                                                    >
+                                                        Supprimer
+                                                    </Link>
                                                 </DropdownMenuItem>
                                             </DropdownMenuContent>
                                         </DropdownMenu>
