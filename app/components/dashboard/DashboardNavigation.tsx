@@ -10,16 +10,16 @@ const links = [
         href: "/dashboard",
     },
     {
-        name: "Orders",
+        name: "Commandes",
         href: "/dashboard/orders",
     },
     {
-        name: "Products",
+        name: "Produits",
         href: "/dashboard/products",
     },
     {
-        name: "Categories",
-        href: "/dashboard/categories",
+        name: "Bannière",
+        href: "/dashboard/banner",
     },
 ];
 

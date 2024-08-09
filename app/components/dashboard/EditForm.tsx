@@ -232,7 +232,7 @@ export function EditForm({data}: DataProps) {
                             <Switch
                                 key={fields.stock.key}
                                 name={fields.stock.name}
-                                checked={data.stock}
+                                defaultChecked={data.stock}
                             />
                         </div>
                         {/* STATUS */}

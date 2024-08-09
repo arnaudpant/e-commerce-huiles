@@ -38,7 +38,7 @@ export async function createProduct(prevState: unknown, formData: FormData) {
             price250: submission.value.price250 ?? 0,
             images: flatUrlsImages,
             category: submission.value.category,
-            stock: submission.value.stock,
+            stock: submission.value.stock === true ? true : false,
         }
     })
 
@@ -80,7 +80,7 @@ export async function editProduct(prevState: any, formData: FormData) {
             price250: submission.value.price250 ?? 0,
             images: flatUrlsImages,
             category: submission.value.category,
-            stock: submission.value.stock,
+            stock: submission.value.stock === true ? true : false,
         }
     })
 
