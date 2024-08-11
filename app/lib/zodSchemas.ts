@@ -14,3 +14,8 @@ export const productSchema = z.object({
     category: z.enum(["huileVegetale", "graisseVegetalePure", "huileVegetaleComposee", "huileAromatique", "huileEssentielle"]),
     stock: z.boolean().optional(),
 })
+
+export const bannerSchema = z.object({
+    title: z.string(),
+    imageString: z.string()
+})
