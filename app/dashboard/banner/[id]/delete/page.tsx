@@ -18,12 +18,12 @@ export default function DeleteBannerRoute({params}: {params: {id:string}}) {
                 </CardHeader>
                 <CardFooter className="w-full flex justify-between">
                     <Button variant="secondary" asChild>
-                        <Link href="/dashboard/banner ">Annuler</Link>
+                        <Link href="/dashboard/banner">Annuler</Link>
                     </Button>
                     <form action={deleteBanner}>
                         <input
                             type="hidden"
-                            name="productId"
+                            name="bannerId"
                             value={params.id}
                         />
                         <SubmitButtons text="Continuer" variant="destructive" />
