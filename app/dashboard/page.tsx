@@ -1,5 +1,4 @@
 import {
-    DollarSign,
     Euro,
     PartyPopper,
     ShoppingBag,
