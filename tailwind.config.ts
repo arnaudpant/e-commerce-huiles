@@ -8,7 +8,7 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx,mdx}',
-	],
+  ],
   prefix: "",
   theme: {
     container: {
@@ -75,7 +75,10 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  corePlugins: {
+    aspectRatio: false,
+  },
+  plugins: [require("tailwindcss-animate"), require('@tailwindcss/aspect-ratio'),],
 } satisfies Config
 
 export default withUt(config)
