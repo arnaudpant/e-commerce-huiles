@@ -29,32 +29,26 @@ export const categories = [
 
 export const huiles: { title: string; href: string; description: string }[] = [
     {
-        title: "Toutes les huiles",
-        href: "/products/all",
-        description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, eos.",
-    },
-    {
         title: "Huiles végétales",
-        href: "/products/huile-vegetale",
+        href: "/products/huiles",
         description:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi ad voluptates explicabo consectetur, cumque debitis!",
     },
     {
         title: "Huiles végétales composées",
-        href: "/products/huile-vegetale-composee",
+        href: "/products/huilescomposees",
         description:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam voluptate quaerat inventore aspernatur, minima at distinctio impedit quibusdam provident molestiae!",
     },
     {
         title: "Huiles aromatiques",
-        href: "/products/huile-aromatique",
+        href: "/products/huilesaromatiques",
         description:
             "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis corporis doloribus suscipit!",
     },
     {
         title: "Huiles essentielles",
-        href: "/products/huile-essentielle",
+        href: "/products/huilesessentielles",
         description:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, magni.",
     },
@@ -63,7 +57,7 @@ export const huiles: { title: string; href: string; description: string }[] = [
 export const graisses: { title: string; href: string; description: string }[] = [
     {
         title: "Graisses végétales pures",
-        href: "/products/graisse-vegetale-pure",
+        href: "/products/graisses",
         description:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, in.",
     },

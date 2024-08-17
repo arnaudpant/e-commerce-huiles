@@ -30,7 +30,7 @@ import { useState } from "react";
 import { useFormState } from "react-dom";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
-import { createProduct, editProduct } from "@/app/actions";
+import { editProduct } from "@/app/actions";
 import { productSchema } from "@/app/lib/zodSchemas";
 
 interface DataProps {
@@ -111,6 +111,7 @@ export function EditForm({data}: DataProps) {
                                 name={fields.description.name}
                                 defaultValue={data.description}
                                 placeholder="Description du produit"
+                                rows={15}
                             />
                             <p className="text-red-500">
                                 {fields.description.errors}
@@ -150,6 +151,7 @@ export function EditForm({data}: DataProps) {
                                 name={fields.information.name}
                                 defaultValue={data.information}
                                 placeholder="Information du produit"
+                                rows={15}
                             />
                             <p className="text-red-500">
                                 {fields.information.errors}
@@ -163,6 +165,7 @@ export function EditForm({data}: DataProps) {
                                 name={fields.composition.name}
                                 defaultValue={data.composition}
                                 placeholder="Composition du produit"
+                                rows={15}
                             />
                             <p className="text-red-500">
                                 {fields.composition.errors}
@@ -176,6 +179,7 @@ export function EditForm({data}: DataProps) {
                                 name={fields.utilisation.name}
                                 defaultValue={data.composition}
                                 placeholder="Utilisation du produit"
+                                rows={15}
                             />
                             <p className="text-red-500">
                                 {fields.utilisation.errors}

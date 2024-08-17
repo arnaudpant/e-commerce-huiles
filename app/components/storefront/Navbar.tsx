@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { NavbarLinks } from "./NavbarLinks";
 import { getKindeServerSession, LoginLink, RegisterLink } from "@kinde-oss/kinde-auth-nextjs/server";
 import { ShoppingBagIcon } from "lucide-react";
 import { UserDropdown } from "./UserDropdown";
@@ -9,6 +8,7 @@ import { NavbarMenu } from "./NavbarMenu";
 export async function Navbar() {
     const { getUser } = getKindeServerSession();
     const user = await getUser();
+
     return (
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between">
             <div className="flex items-center">
@@ -17,8 +17,11 @@ export async function Navbar() {
                         HuilesVak
                     </h1>
                 </Link>
-                {/* <NavbarLinks /> */}
-                <NavbarMenu />
+                {user?.id === "kp_c1eaeaf06ad04886870c4f0a12e182d1" ? (
+                    <NavbarMenu admin={true} />
+                ) : (
+                    <NavbarMenu admin={false} />
+                )}
             </div>
 
             <div className="flex items-center">

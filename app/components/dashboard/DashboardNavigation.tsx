@@ -21,6 +21,10 @@ const links = [
         name: "Bannière",
         href: "/dashboard/banner",
     },
+    {
+        name: "Accueil",
+        href: "/",
+    },
 ];
 
 const DashboardNavigation = () => {

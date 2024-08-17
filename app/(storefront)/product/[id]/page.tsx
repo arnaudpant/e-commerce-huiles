@@ -55,7 +55,7 @@ export default async function ProductIdRoute({
                             </p>
                         )}
                         {data.price100 !== 0 && (
-                            <p className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xl font-medium text-primary ring-1 ring-inset ring-primary/10">
+                            <p className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-3xl font-medium text-primary ring-1 ring-inset ring-primary/10">
                                 {data.price100}€{" "}
                                 <span className="text-sm pl-2">/ 100ml</span>
                             </p>
@@ -67,23 +67,38 @@ export default async function ProductIdRoute({
                             </p>
                         )}
                     </div>
-                    <div className="mt-3 flex items-center gap-1">
+                    {/* <div className="mt-3 flex items-center gap-1">
                         <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
                         <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
                         <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
                         <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
                         <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-                    </div>
-                    <p className="text-base text-gray-700 mt-6">
-                        {data.description}
+                    </div> */}
+                    <p className="text-xl text-primary tracking-tight mt-6">
+                        Description du produit
                     </p>
-                    <p className="text-base text-gray-700 mt-6">
-                        {data.information}
+                    {data.description.split(`\r\n`).map((phrase, index) => (
+                        <p className="text-sm text-gray-700 mt-1" key={index}>
+                            {phrase}
+                        </p>
+                    ))}
+                    <p className="text-xl text-primary tracking-tight mt-10">
+                        Informations du produit
                     </p>
-                    <p className="text-base text-gray-700 mt-6">
-                        {data.composition}
+                    {data.information.split(`\r\n`).map((phrase, index) => (
+                        <p className="text-sm text-gray-700 mt-1" key={index}>
+                            {phrase}
+                        </p>
+                    ))}
+                    <p className="text-xl text-primary tracking-tight text-gray-700 mt-10">
+                        Composition du produit
                     </p>
-                    <Button size="lg" className="w-full mt-5">
+                    {data.composition.split(`\r\n`).map((phrase, index) => (
+                        <p className="text-sm text-gray-700 mt-1" key={index}>
+                            {phrase}
+                        </p>
+                    ))}
+                    <Button size="lg" className="w-full mt-10">
                         <ShoppingBag className="mr-4 h-5 w-5" />
                         Ajouter au panier
                     </Button>

@@ -55,19 +55,19 @@ export function ProductCard({ item }: Props) {
 
             <div className="flex justify-between items-start mt-2">
                 <h1 className="font-semibold text-xl">{item.name}</h1>
-                <div className="flex flex-col gap-y-1">
+                <div className="flex flex-col gap-y-1 w-[130px] pl-2">
                     {item.price50 !== 0 && (
-                        <h3 className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/10">
+                        <h3 className="inline-flex items-center justify-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/10">
                             {item.price50}€ / 50ml
                         </h3>
                     )}
                     {item.price100 !== 0 && (
-                        <h3 className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/10">
+                        <h3 className="inline-flex items-center justify-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/10">
                             {item.price100}€ / 100ml
                         </h3>
                     )}
                     {item.price250 !== 0 && (
-                        <h3 className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/10">
+                        <h3 className="inline-flex items-center justify-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/10">
                             {item.price250}€ / 250ml
                         </h3>
                     )}

@@ -5,6 +5,7 @@ async function getData() {
     const data = await prisma.product.findMany({
         where: {
             status: "published",
+            stock: true
         },
         select: {
             id: true,
@@ -24,6 +25,7 @@ async function getData() {
         orderBy: {
             createdAt: "desc",
         },
+        take: 3
     });
     return data
 }
