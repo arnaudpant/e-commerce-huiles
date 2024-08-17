@@ -9,27 +9,27 @@ export const navbarLinks = [
     },
     {
         id: 2,
-        name: "Huile végétale",
+        name: "Huiles végétales",
         href: "/products/huile-vegetale",
     },
     {
         id: 3,
-        name: "Graisse végétale pure",
+        name: "Graisses végétales pures",
         href: "/products/graisse-vegetale-pure",
     },
     {
         id: 4,
-        name: "Huile végétale composée",
+        name: "Huiles végétales composées",
         href: "/products/huile-vegetale-composee",
     },
     {
         id: 5,
-        name: "Huile aromatique",
+        name: "Huiles aromatiques",
         href: "/products/huile-aromatique",
     },
     {
         id: 6,
-        name: "Huile essentielle",
+        name: "Huiles essentielles",
         href: "/products/huile-essentielle",
     },
 ];
