@@ -4,6 +4,7 @@ import { getKindeServerSession, LoginLink, RegisterLink } from "@kinde-oss/kinde
 import { ShoppingBagIcon } from "lucide-react";
 import { UserDropdown } from "./UserDropdown";
 import { Button } from "../ui/button";
+import { NavbarMenu } from "./NavbarMenu";
 
 export async function Navbar() {
     const { getUser } = getKindeServerSession();
@@ -16,7 +17,8 @@ export async function Navbar() {
                         HuilesVak
                     </h1>
                 </Link>
-                <NavbarLinks />
+                {/* <NavbarLinks /> */}
+                <NavbarMenu />
             </div>
 
             <div className="flex items-center">
@@ -41,11 +43,11 @@ export async function Navbar() {
                         />
                     </>
                 ) : (
-                    <div className="hidden md:flex md:flex-1 md:items-center md:justify-end md:space-x-2 gap-4">
-                        <Button variant="ghost" asChild>
+                    <div className="hidden md:flex md:flex-1 md:items-center md:justify-end md:space-x-2 gap-1">
+                        <Button size="sm" variant="secondary" asChild>
                             <LoginLink>Connexion</LoginLink>
                         </Button>
-                        <Button asChild>
+                        <Button size="sm" asChild>
                             <RegisterLink>Inscription</RegisterLink>
                         </Button>
                     </div>

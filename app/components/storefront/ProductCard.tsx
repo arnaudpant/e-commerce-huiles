@@ -1,4 +1,3 @@
-import { ProductType } from "@/app/lib/type";
 import {
     Carousel,
     CarouselContent,
