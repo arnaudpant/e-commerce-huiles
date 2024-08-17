@@ -1,15 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import a01 from "@public/a01.jpeg";
-import a02 from "@public/a02.jpeg";
-import a03 from "@public/a03.jpeg";
+import a01 from "/public/a01.jpeg";
+import a02 from "/public/a02.jpeg";
+import a03 from "/public/a03.jpeg";
 
 export function CategoriesSelection() {
     return (
         <div className="py-24 sm:py-32">
             <div className="flex justify-between items-center">
                 <h2 className="text-2xl font-extrabold tracking-tight">
-                    Boutique par catégories
+                    Boutique
                 </h2>
                 <Link
                     href="/products/all"

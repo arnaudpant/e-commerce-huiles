@@ -34,7 +34,7 @@ export function ProductCard({ item }: Props) {
             <Carousel>
                 <CarouselContent className="w-full mx-auto">
                     {item.images.map((imgUrl, index) => (
-                        <CarouselItem key={index}>
+                        <CarouselItem key={index} className="pl-0">
                             <div className="relative h-[330px]">
                                 <Image
                                     src={imgUrl}
@@ -46,32 +46,40 @@ export function ProductCard({ item }: Props) {
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CarouselPrevious className="ml-16" />
-                <CarouselNext className="mr-16" />
+                {item.images.length > 1 && (
+                    <>
+                        <CarouselPrevious className="ml-20" />
+                        <CarouselNext className="mr-16" />
+                    </>
+                )}
             </Carousel>
 
-            <div className="flex justify-between items-center mt-2">
+            <div className="flex justify-between items-start mt-2">
                 <h1 className="font-semibold text-xl">{item.name}</h1>
                 <div className="flex flex-col gap-y-1">
-                    {item.price50 && (
+                    {item.price50 !== 0 && (
                         <h3 className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/10">
-                            {item.price50}€/50ml
+                            {item.price50}€ / 50ml
                         </h3>
                     )}
-                    {item.price100 && (
+                    {item.price100 !== 0 && (
                         <h3 className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/10">
-                            {item.price100}€/100ml
+                            {item.price100}€ / 100ml
                         </h3>
                     )}
-                    {item.price250 && (
+                    {item.price250 !== 0 && (
                         <h3 className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/10">
-                            {item.price250}€/250ml
+                            {item.price250}€ / 250ml
                         </h3>
                     )}
                 </div>
             </div>
-            <p className="text-gray-600 text-sm mt-2 line-clamp-3">{item.description}</p>
-            <Button asChild className="w-full mt-5"><Link href={`/product/${item.id}`}>Commander</Link></Button>
+            <p className="text-gray-600 text-sm mt-2 line-clamp-3">
+                {item.description}
+            </p>
+            <Button asChild className="w-full mt-5">
+                <Link href={`/product/${item.id}`}>Commander</Link>
+            </Button>
         </div>
     );
 }
