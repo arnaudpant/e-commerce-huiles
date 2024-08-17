@@ -20,3 +20,16 @@ export type CategoryHuileType = {
 export type StatusType = {
     status: "draft" | "published" | "archived"
 }
+
+export type Cart = {
+    userId: string;
+    items: Array<{
+        id: string;
+        name: string;
+        price50: number;
+        price100: number;
+        price250: number;
+        quantity: number;
+        imageString: string
+    }>
+}

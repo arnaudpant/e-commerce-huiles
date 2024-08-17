@@ -5,6 +5,8 @@ import { redirect } from "next/navigation";
 import { parseWithZod } from "@conform-to/zod"
 import { bannerSchema, productSchema } from "./lib/zodSchemas";
 import prisma from "./lib/db";
+import { redis } from "./lib/redis";
+import { Cart } from "./lib/type";
 
 
 export async function createProduct(prevState: unknown, formData: FormData) {
@@ -145,4 +147,78 @@ export async function deleteBanner(formData: FormData) {
     })
 
     redirect("/dashboard/banner")
+}
+
+export async function addIten(productId: string) {
+    const { getUser } = getKindeServerSession();
+    const user = await getUser()
+
+    if(!user) {
+        return redirect("/")
+    }
+
+    let cart: Cart | null = await redis.get(`cart-${user.id}`)
+
+    const selectedProduct = await prisma.product.findUnique({
+        select: {
+            id: true,
+            name: true,
+            price50: true,
+            price100: true,
+            price250: true,
+            images: true,
+        },
+        where: {
+            id: productId
+        }
+    })
+
+    if (!selectedProduct) {
+        throw new Error("Pas de produit avec cet ID")
+    }
+
+    let myCart = {} as Cart
+
+    /** Creation d'une Cart si non existante */
+    if(!cart || !cart.items) {
+        myCart = {
+            userId: user.id,
+            items: [
+                {
+                    price50: selectedProduct.price50,
+                    price100: selectedProduct.price100,
+                    price250: selectedProduct.price250,
+                    name: selectedProduct.name,
+                    id: selectedProduct.id,
+                    imageString: selectedProduct.images[0],
+                    quantity: 1
+                }
+            ]
+        }
+    } 
+    else /** Sinon Cart existante */
+    {
+        let itemFound = false
+        /** Si produit deja dans la Cart = quantity +1 */
+        myCart.items = cart.items.map((item) => {
+            if(item.id === productId) {
+                itemFound = true
+                item.quantity += 1
+            }
+            return item
+        })
+        /** Si produit non dans la Cart = Ajout en quantity 1 */
+        if (!itemFound) {
+            myCart.items.push({
+                price50: selectedProduct.price50,
+                price100: selectedProduct.price100,
+                price250: selectedProduct.price250,
+                name: selectedProduct.name,
+                id: selectedProduct.id,
+                imageString: selectedProduct.images[0],
+                quantity: 1
+            })
+        }
+    }
+    await redis.set(`cart-${user.id}`, myCart)
 }

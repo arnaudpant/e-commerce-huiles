@@ -8,3 +8,5 @@
 - Prisma
 - Neon.io
 - Kinde (Auth)
+
+- Redis Upstash
