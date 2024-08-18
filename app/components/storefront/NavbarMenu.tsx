@@ -76,7 +76,7 @@ export function NavbarMenu({ admin }: AdminType) {
                                 <NavigationMenuLink
                                     className={navigationMenuTriggerStyle()}
                                 >
-                                    Dashboard
+                                    <span className="text-red-600">Dashboard</span>
                                 </NavigationMenuLink>
                             </Link>
                         </NavigationMenuItem>

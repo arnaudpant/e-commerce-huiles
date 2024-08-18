@@ -32,9 +32,9 @@ model Product {
   composition String
   utilisation String
   status ProductStatus
-  price50 Int
-  price100 Int
-  price250 Int
+  price50 Float
+  price100 Float
+  price250 Float
   images String[]
   category Category
   stock Boolean @default(false)
