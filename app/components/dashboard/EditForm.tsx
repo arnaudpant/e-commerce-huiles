@@ -195,6 +195,7 @@ export function EditForm({data}: DataProps) {
                                 type="number"
                                 className="w-full"
                                 placeholder="0€"
+                                step="0.1"
                             />
                             <p className="text-red-500">
                                 {fields.price50.errors}
@@ -210,6 +211,7 @@ export function EditForm({data}: DataProps) {
                                 type="number"
                                 className="w-full"
                                 placeholder="0€"
+                                step="0.1"
                             />
                             <p className="text-red-500">
                                 {fields.price100.errors}
@@ -225,6 +227,7 @@ export function EditForm({data}: DataProps) {
                                 type="number"
                                 className="w-full"
                                 placeholder="0€"
+                                step="0.1"
                             />
                             <p className="text-red-500">
                                 {fields.price250.errors}
