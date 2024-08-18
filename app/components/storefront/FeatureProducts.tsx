@@ -1,6 +1,7 @@
 import prisma from "@/app/lib/db";
 import { ProductCard } from "./ProductCard";
 import { Suspense } from "react";
+import { ProductCardSkeleton } from "./ProductCardSkeleton";
 
 async function getData() {
     const data = await prisma.product.findMany({
@@ -58,10 +59,10 @@ async function LoadingFeaturedProducts() {
 
 function LoadingRows() {
     return (
-        <div className="mt-5 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            <LoadingFeaturedProducts />
-            <LoadingFeaturedProducts />
-            <LoadingFeaturedProducts />
+        <div className="mt-5 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
+            <ProductCardSkeleton />
+            <ProductCardSkeleton />
+            <ProductCardSkeleton />
         </div>
-    )
+    );
 }

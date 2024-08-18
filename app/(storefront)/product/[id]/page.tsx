@@ -2,9 +2,7 @@ import { addIten } from "@/app/actions";
 import { FeaturedProducts } from "@/app/components/storefront/FeatureProducts";
 import { ImageSlider } from "@/app/components/storefront/ImageSlider";
 import { ShoppingBagButton } from "@/app/components/SubmitButtons";
-import { Button } from "@/app/components/ui/button";
 import prisma from "@/app/lib/db";
-import { ShoppingBag, StarIcon } from "lucide-react";
 import { notFound } from "next/navigation";
 
 async function getData(productId: string) {
@@ -70,13 +68,6 @@ export default async function ProductIdRoute({
                             </p>
                         )}
                     </div>
-                    {/* <div className="mt-3 flex items-center gap-1">
-                        <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-                        <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-                        <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-                        <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-                        <StarIcon className="h-4 w-4 text-yellow-500 fill-yellow-500" />
-                    </div> */}
                     <p className="text-xl text-primary tracking-tight mt-6">
                         Description du produit
                     </p>
