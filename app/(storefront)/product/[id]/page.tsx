@@ -1,6 +1,7 @@
 import { addIten } from "@/app/actions";
 import { FeaturedProducts } from "@/app/components/storefront/FeatureProducts";
 import { ImageSlider } from "@/app/components/storefront/ImageSlider";
+import { ShoppingBagButton } from "@/app/components/SubmitButtons";
 import { Button } from "@/app/components/ui/button";
 import prisma from "@/app/lib/db";
 import { ShoppingBag, StarIcon } from "lucide-react";
@@ -101,10 +102,7 @@ export default async function ProductIdRoute({
                         </p>
                     ))}
                     <form action={addProductShoppingCart}>
-                        <Button size="lg" className="w-full mt-10">
-                            <ShoppingBag className="mr-4 h-5 w-5" />
-                            Ajouter au panier
-                        </Button>
+                        <ShoppingBagButton />
                     </form>
                 </div>
             </div>

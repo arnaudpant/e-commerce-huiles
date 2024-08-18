@@ -1,11 +1,12 @@
 import prisma from "@/app/lib/db";
 import { ProductCard } from "./ProductCard";
+import { Suspense } from "react";
 
 async function getData() {
     const data = await prisma.product.findMany({
         where: {
             status: "published",
-            stock: true
+            stock: true,
         },
         select: {
             id: true,
@@ -25,23 +26,42 @@ async function getData() {
         orderBy: {
             createdAt: "desc",
         },
-        take: 3
+        take: 3,
     });
-    return data
+    return data;
 }
 
-export async function FeaturedProducts() {
-    const data = await getData();
+export function FeaturedProducts() {
+    
     return (
         <>
             <h2 className="text-xl font-extrabold tracking-tight">
                 Articles en vedette
             </h2>
-            <div className="mt-5 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
-                {data.map((item) => (
-                    <ProductCard key={item.id} item={item} />
-                ))}
-            </div>
+            <Suspense fallback={<LoadingRows />}>
+                <LoadingFeaturedProducts />
+            </Suspense>
         </>
     );
+}
+
+async function LoadingFeaturedProducts() {
+    const data = await getData();
+    return (
+        <div className="mt-5 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
+            {data.map((item) => (
+                <ProductCard key={item.id} item={item} />
+            ))}
+        </div>
+    );
+}
+
+function LoadingRows() {
+    return (
+        <div className="mt-5 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <LoadingFeaturedProducts />
+            <LoadingFeaturedProducts />
+            <LoadingFeaturedProducts />
+        </div>
+    )
 }
