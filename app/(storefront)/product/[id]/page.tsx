@@ -14,6 +14,7 @@ async function getData(productId: string) {
             id: true,
             name: true,
             description: true,
+            littledescription: true,
             information: true,
             composition: true,
             utilisation: true,
@@ -71,7 +72,7 @@ export default async function ProductIdRoute({
                     <p className="text-xl text-primary tracking-tight mt-6">
                         Description du produit
                     </p>
-                    {data.description.split(`\r\n`).map((phrase, index) => (
+                    {data.description.split(`\n`).map((phrase, index) => (
                         <p className="text-sm text-gray-700 mt-1" key={index}>
                             {phrase}
                         </p>
@@ -79,7 +80,7 @@ export default async function ProductIdRoute({
                     <p className="text-xl text-primary tracking-tight mt-10">
                         Informations du produit
                     </p>
-                    {data.information.split(`\r\n`).map((phrase, index) => (
+                    {data.information.split(`\n`).map((phrase, index) => (
                         <p className="text-sm text-gray-700 mt-1" key={index}>
                             {phrase}
                         </p>
@@ -87,7 +88,7 @@ export default async function ProductIdRoute({
                     <p className="text-xl text-primary tracking-tight text-gray-700 mt-10">
                         Composition du produit
                     </p>
-                    {data.composition.split(`\r\n`).map((phrase, index) => (
+                    {data.composition.split(`\n`).map((phrase, index) => (
                         <p className="text-sm text-gray-700 mt-1" key={index}>
                             {phrase}
                         </p>

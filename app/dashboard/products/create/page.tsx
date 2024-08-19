@@ -84,14 +84,31 @@ export default function ProductCreateRoute() {
                             />
                             <p className="text-red-500">{fields.name.errors}</p>
                         </div>
+                        {/* LITTLE DESCRIPTION */}
+                        <div className="flex flex-col gap-3">
+                            <Label>Description courte</Label>
+                            <Textarea
+                                key={fields.littledescription.key}
+                                name={fields.littledescription.name}
+                                defaultValue={
+                                    fields.littledescription.initialValue
+                                }
+                                placeholder="Description courte en 3 phrases"
+                                rows={3}
+                            />
+                            <p className="text-red-500">
+                                {fields.littledescription.errors}
+                            </p>
+                        </div>
                         {/* DESCRIPTION */}
                         <div className="flex flex-col gap-3">
-                            <Label>Description</Label>
+                            <Label>Description complete</Label>
                             <Textarea
                                 key={fields.description.key}
                                 name={fields.description.name}
                                 defaultValue={fields.description.initialValue}
                                 placeholder="Description du produit"
+                                rows={15}
                             />
                             <p className="text-red-500">
                                 {fields.description.errors}
@@ -131,6 +148,7 @@ export default function ProductCreateRoute() {
                                 name={fields.information.name}
                                 defaultValue={fields.information.initialValue}
                                 placeholder="Information du produit"
+                                rows={15}
                             />
                             <p className="text-red-500">
                                 {fields.information.errors}
@@ -144,6 +162,7 @@ export default function ProductCreateRoute() {
                                 name={fields.composition.name}
                                 defaultValue={fields.composition.initialValue}
                                 placeholder="Composition du produit"
+                                rows={15}
                             />
                             <p className="text-red-500">
                                 {fields.composition.errors}
@@ -157,6 +176,7 @@ export default function ProductCreateRoute() {
                                 name={fields.utilisation.name}
                                 defaultValue={fields.utilisation.initialValue}
                                 placeholder="Utilisation du produit"
+                                rows={15}
                             />
                             <p className="text-red-500">
                                 {fields.utilisation.errors}
@@ -164,7 +184,10 @@ export default function ProductCreateRoute() {
                         </div>
                         {/* PRIX 50ml */}
                         <div className="flex flex-col gap-3">
-                            <Label>Prix 50ml</Label>
+                            <Label>
+                                Prix 50ml (0 si non distribué sous cette
+                                quantité)
+                            </Label>
                             <Input
                                 key={fields.price50.key}
                                 name={fields.price50.name}
@@ -172,6 +195,7 @@ export default function ProductCreateRoute() {
                                 type="number"
                                 className="w-full"
                                 placeholder="0€"
+                                step="0.1"
                             />
                             <p className="text-red-500">
                                 {fields.price50.errors}
@@ -179,7 +203,10 @@ export default function ProductCreateRoute() {
                         </div>
                         {/* PRIX 100ml */}
                         <div className="flex flex-col gap-3">
-                            <Label>Prix 100ml</Label>
+                            <Label>
+                                Prix 100ml (0 si non distribué sous cette
+                                quantité)
+                            </Label>
                             <Input
                                 key={fields.price100.key}
                                 name={fields.price100.name}
@@ -187,6 +214,7 @@ export default function ProductCreateRoute() {
                                 type="number"
                                 className="w-full"
                                 placeholder="0€"
+                                step="0.1"
                             />
                             <p className="text-red-500">
                                 {fields.price100.errors}
@@ -194,7 +222,10 @@ export default function ProductCreateRoute() {
                         </div>
                         {/* PRIX 250ml */}
                         <div className="flex flex-col gap-3">
-                            <Label>Prix 250ml</Label>
+                            <Label>
+                                Prix 250ml (0 si non distribué sous cette
+                                quantité)
+                            </Label>
                             <Input
                                 key={fields.price250.key}
                                 name={fields.price250.name}
@@ -202,6 +233,7 @@ export default function ProductCreateRoute() {
                                 type="number"
                                 className="w-full"
                                 placeholder="0€"
+                                step="0.1"
                             />
                             <p className="text-red-500">
                                 {fields.price250.errors}

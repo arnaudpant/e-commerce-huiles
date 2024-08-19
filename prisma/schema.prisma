@@ -28,6 +28,7 @@ model Product {
   id String @id @default(uuid())
   name String
   description String
+  littledescription String
   information String
   composition String
   utilisation String

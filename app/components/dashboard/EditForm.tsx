@@ -38,6 +38,7 @@ interface DataProps {
         id: string;
         name: string;
         description: string;
+        littledescription: string;
         information: string;
         composition: string;
         utilisation: string;
@@ -46,7 +47,12 @@ interface DataProps {
         price100: number;
         price250?: number;
         images: string[];
-        category: "huileVegetale"| "graisseVegetalePure"| "huileVegetaleComposee"| "huileAromatique"| "huileEssentielle";
+        category:
+            | "huileVegetale"
+            | "graisseVegetalePure"
+            | "huileVegetaleComposee"
+            | "huileAromatique"
+            | "huileEssentielle";
         stock: boolean;
     };
 }
@@ -102,6 +108,20 @@ export function EditForm({data}: DataProps) {
                                 placeholder="Nom du produit"
                             />
                             <p className="text-red-500">{fields.name.errors}</p>
+                        </div>
+                        {/* LITTLE DESCRIPTION */}
+                        <div className="flex flex-col gap-3">
+                            <Label>Little Description</Label>
+                            <Textarea
+                                key={fields.littledescription.key}
+                                name={fields.littledescription.name}
+                                defaultValue={data.littledescription}
+                                placeholder="Description courte en 3 phrases"
+                                rows={3}
+                            />
+                            <p className="text-red-500">
+                                {fields.littledescription.errors}
+                            </p>
                         </div>
                         {/* DESCRIPTION */}
                         <div className="flex flex-col gap-3">

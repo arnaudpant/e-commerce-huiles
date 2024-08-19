@@ -3,6 +3,7 @@ import { z } from "zod"
 export const productSchema = z.object({
     name: z.string(),
     description: z.string(),
+    littledescription: z.string(),
     information: z.string(),
     composition: z.string(),
     utilisation: z.string(),

@@ -13,6 +13,7 @@ async function getData() {
             id: true,
             name: true,
             description: true,
+            littledescription: true,
             information: true,
             composition: true,
             utilisation: true,

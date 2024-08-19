@@ -14,6 +14,7 @@ type Props = {
         id: string;
         name: string;
         description: string;
+        littledescription: string;
         information: string;
         composition: string;
         utilisation: string;
