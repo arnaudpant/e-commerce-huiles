@@ -8,7 +8,9 @@ export type ProductType = {
     status: StatusType,
     price50: number,
     price100: number,
-    price250: number,
+    price2: number,
+    price5: number,
+    option250: boolean,
     images: string[],
     category: CategoryHuileType,
     stock: boolean
@@ -29,7 +31,8 @@ export type Cart = {
         name: string;
         price50: number;
         price100: number;
-        price250: number;
+        price2: number;
+        price5: number;
         quantity: number;
         imageString: string
     }>

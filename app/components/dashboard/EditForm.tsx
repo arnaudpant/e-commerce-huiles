@@ -45,7 +45,10 @@ interface DataProps {
         status: "draft" | "published" | "archived";
         price50: number;
         price100: number;
-        price250?: number;
+        price2: number;
+        price5: number;
+        option250: boolean;
+        stock: boolean;
         images: string[];
         category:
             | "huileVegetale"
@@ -53,7 +56,6 @@ interface DataProps {
             | "huileVegetaleComposee"
             | "huileAromatique"
             | "huileEssentielle";
-        stock: boolean;
     };
 }
 
@@ -237,21 +239,46 @@ export function EditForm({data}: DataProps) {
                                 {fields.price100.errors}
                             </p>
                         </div>
-                        {/* PRIX 250ml */}
+                        {/* PRIX 2.5ml */}
                         <div className="flex flex-col gap-3">
-                            <Label>Prix 250ml</Label>
+                            <Label>Prix 2.5ml</Label>
                             <Input
-                                key={fields.price250.key}
-                                name={fields.price250.name}
-                                defaultValue={data.price250}
+                                key={fields.price2.key}
+                                name={fields.price2.name}
+                                defaultValue={data.price2}
                                 type="number"
                                 className="w-full"
                                 placeholder="0€"
                                 step="0.1"
                             />
                             <p className="text-red-500">
-                                {fields.price250.errors}
+                                {fields.price2.errors}
                             </p>
+                        </div>
+                        {/* PRIX 5ml */}
+                        <div className="flex flex-col gap-3">
+                            <Label>Prix 250ml</Label>
+                            <Input
+                                key={fields.price5.key}
+                                name={fields.price5.name}
+                                defaultValue={data.price5}
+                                type="number"
+                                className="w-full"
+                                placeholder="0€"
+                                step="0.1"
+                            />
+                            <p className="text-red-500">
+                                {fields.price5.errors}
+                            </p>
+                        </div>
+                        {/* Option 250ml */}
+                        <div className="flex flex-col gap-3">
+                            <Label>250ml possible</Label>
+                            <Switch
+                                key={fields.option250.key}
+                                name={fields.option250.name}
+                                defaultValue={fields.option250.initialValue}
+                            />
                         </div>
                         {/* STOCK */}
                         <div className="flex flex-col gap-3">

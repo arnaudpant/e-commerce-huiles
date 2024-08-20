@@ -220,24 +220,52 @@ export default function ProductCreateRoute() {
                                 {fields.price100.errors}
                             </p>
                         </div>
-                        {/* PRIX 250ml */}
+                        {/* PRIX 2.5ml */}
                         <div className="flex flex-col gap-3">
                             <Label>
-                                Prix 250ml (0 si non distribué sous cette
+                                Prix 2.5ml (0 si non distribué sous cette
                                 quantité)
                             </Label>
                             <Input
-                                key={fields.price250.key}
-                                name={fields.price250.name}
-                                defaultValue={fields.price250.initialValue}
+                                key={fields.price2.key}
+                                name={fields.price2.name}
+                                defaultValue={fields.price2.initialValue}
                                 type="number"
                                 className="w-full"
                                 placeholder="0€"
                                 step="0.1"
                             />
                             <p className="text-red-500">
-                                {fields.price250.errors}
+                                {fields.price2.errors}
                             </p>
+                        </div>
+                        {/* PRIX 5ml */}
+                        <div className="flex flex-col gap-3">
+                            <Label>
+                                Prix 5ml (0 si non distribué sous cette
+                                quantité)
+                            </Label>
+                            <Input
+                                key={fields.price5.key}
+                                name={fields.price5.name}
+                                defaultValue={fields.price5.initialValue}
+                                type="number"
+                                className="w-full"
+                                placeholder="0€"
+                                step="0.1"
+                            />
+                            <p className="text-red-500">
+                                {fields.price5.errors}
+                            </p>
+                        </div>
+                        {/* Option 250ml */}
+                        <div className="flex flex-col gap-3">
+                            <Label>250ml possible</Label>
+                            <Switch
+                                key={fields.option250.key}
+                                name={fields.option250.name}
+                                defaultValue={fields.option250.initialValue}
+                            />
                         </div>
                         {/* STOCK */}
                         <div className="flex flex-col gap-3">

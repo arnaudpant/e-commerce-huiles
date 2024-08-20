@@ -24,7 +24,7 @@ export default async function BagRoute() {
         totalPrice +=
             item.price50 * item.quantity +
             item.price100 * item.quantity +
-            item.price250 * item.quantity;
+            item.price5 * item.quantity;
     });
 
     return (

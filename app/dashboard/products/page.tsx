@@ -62,7 +62,9 @@ export default async function Products() {
                                 <TableHead>Stock</TableHead>
                                 <TableHead>Prix 50ml</TableHead>
                                 <TableHead>Prix 100ml</TableHead>
-                                <TableHead>Prix 250ml</TableHead>
+                                <TableHead>Prix 2ml</TableHead>
+                                <TableHead>Prix 5ml</TableHead>
+                                <TableHead>250ml</TableHead>
                                 <TableHead>Date</TableHead>
                                 <TableHead>Status</TableHead>
                                 <TableHead className="text-end">
@@ -97,9 +99,17 @@ export default async function Products() {
                                             : "X"}
                                     </TableCell>
                                     <TableCell>
-                                        {item.price250 !== 0
-                                            ? `${item.price250}€`
+                                        {item.price2 !== 0
+                                            ? `${item.price2}€`
                                             : "X"}
+                                    </TableCell>
+                                    <TableCell>
+                                        {item.price5 !== 0
+                                            ? `${item.price5}€`
+                                            : "X"}
+                                    </TableCell>
+                                    <TableCell>
+                                        {item.option250 ? "250ml" : "X"}
                                     </TableCell>
                                     <TableCell>
                                         {new Intl.DateTimeFormat(

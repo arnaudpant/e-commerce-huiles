@@ -35,7 +35,9 @@ model Product {
   status ProductStatus
   price50 Float
   price100 Float
-  price250 Float
+  price2 Float
+  price5 Float
+  option250 Boolean @default(false)
   images String[]
   category Category
   stock Boolean @default(false)

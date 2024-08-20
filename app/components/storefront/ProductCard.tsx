@@ -21,7 +21,9 @@ type Props = {
         status: string;
         price50: number;
         price100: number;
-        price250: number;
+        price2: number;
+        price5: number;
+        option250: boolean;
         images: string[];
         category: string;
         stock: boolean;
@@ -67,9 +69,14 @@ export function ProductCard({ item }: Props) {
                             {item.price100}€ / 100ml
                         </h3>
                     )}
-                    {item.price250 !== 0 && (
+                    {item.price5 !== 0 && (
                         <h3 className="inline-flex items-center justify-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/10">
-                            {item.price250}€ / 250ml
+                            {item.price5}€ / 5ml
+                        </h3>
+                    )}
+                    {item.price2 !== 0 && (
+                        <h3 className="inline-flex items-center justify-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/10">
+                            {item.price2}€ / 2.5ml
                         </h3>
                     )}
                 </div>
@@ -78,10 +85,9 @@ export function ProductCard({ item }: Props) {
                 {item.description}
             </p>
             <div className="absolute w-full bottom-0">
-            <Button asChild className="w-full mt-5">
-                <Link href={`/product/${item.id}`}>Commander</Link>
-            </Button>
-
+                <Button asChild className="w-full mt-5">
+                    <Link href={`/product/${item.id}`}>Commander</Link>
+                </Button>
             </div>
         </div>
     );

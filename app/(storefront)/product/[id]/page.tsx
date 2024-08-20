@@ -21,7 +21,9 @@ async function getData(productId: string) {
             status: true,
             price50: true,
             price100: true,
-            price250: true,
+            price2: true,
+            price5: true,
+            option250: true,
             images: true,
             category: true,
             stock: true,
@@ -62,10 +64,16 @@ export default async function ProductIdRoute({
                                 <span className="text-sm pl-2">/ 100ml</span>
                             </p>
                         )}
-                        {data.price250 !== 0 && (
+                        {data.price2 !== 0 && (
                             <p className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xl font-medium text-primary ring-1 ring-inset ring-primary/10">
-                                {data.price250}€{" "}
-                                <span className="text-sm pl-2">/ 250ml</span>
+                                {data.price2}€{" "}
+                                <span className="text-sm pl-2">/ 2.5ml</span>
+                            </p>
+                        )}
+                        {data.price5 !== 0 && (
+                            <p className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xl font-medium text-primary ring-1 ring-inset ring-primary/10">
+                                {data.price5}€{" "}
+                                <span className="text-sm pl-2">/ 5ml</span>
                             </p>
                         )}
                     </div>
