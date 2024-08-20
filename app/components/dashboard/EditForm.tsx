@@ -199,7 +199,7 @@ export function EditForm({data}: DataProps) {
                             <Textarea
                                 key={fields.utilisation.key}
                                 name={fields.utilisation.name}
-                                defaultValue={data.composition}
+                                defaultValue={data.utilisation}
                                 placeholder="Utilisation du produit"
                                 rows={15}
                             />
@@ -277,7 +277,7 @@ export function EditForm({data}: DataProps) {
                             <Switch
                                 key={fields.option250.key}
                                 name={fields.option250.name}
-                                defaultValue={fields.option250.initialValue}
+                                defaultChecked={data.option250}
                             />
                         </div>
                         {/* STOCK */}

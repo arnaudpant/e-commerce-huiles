@@ -14,7 +14,6 @@ async function getData(productId: string) {
             id: true,
             name: true,
             description: true,
-            littledescription: true,
             information: true,
             composition: true,
             utilisation: true,
@@ -41,7 +40,7 @@ export default async function ProductIdRoute({
     params: { id: string };
 }) {
     const data = await getData(params.id);
-    const addProductShoppingCart = addIten.bind(null, data.id)
+    const addProductShoppingCart = addIten.bind(null, data.id);
 
     return (
         <>
@@ -51,9 +50,9 @@ export default async function ProductIdRoute({
                     <h1 className="text-3xl font-extrabold tracking-tight">
                         {data.name}
                     </h1>
-                    <div className="flex gap-2 mt-2">
+                    <div className="flex gap-2 mt-2 flex-wrap">
                         {data.price50 !== 0 && (
-                            <p className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xl font-medium text-primary ring-1 ring-inset ring-primary/10">
+                            <p className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-3xl font-medium text-primary ring-1 ring-inset ring-primary/10">
                                 {data.price50}€{" "}
                                 <span className="text-sm pl-2">/ 50ml</span>
                             </p>
@@ -65,13 +64,13 @@ export default async function ProductIdRoute({
                             </p>
                         )}
                         {data.price2 !== 0 && (
-                            <p className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xl font-medium text-primary ring-1 ring-inset ring-primary/10">
+                            <p className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-3xl font-medium text-primary ring-1 ring-inset ring-primary/10">
                                 {data.price2}€{" "}
                                 <span className="text-sm pl-2">/ 2.5ml</span>
                             </p>
                         )}
                         {data.price5 !== 0 && (
-                            <p className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xl font-medium text-primary ring-1 ring-inset ring-primary/10">
+                            <p className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-3xl font-medium text-primary ring-1 ring-inset ring-primary/10">
                                 {data.price5}€{" "}
                                 <span className="text-sm pl-2">/ 5ml</span>
                             </p>
@@ -93,6 +92,24 @@ export default async function ProductIdRoute({
                             {phrase}
                         </p>
                     ))}
+                    <form action={addProductShoppingCart}>
+                        <ShoppingBagButton />
+                    </form>
+                </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start lg:gap-x-24">
+                <div>
+                    <p className="text-xl text-primary tracking-tight text-gray-700 mt-10">
+                        Utilsation du produit
+                    </p>
+                    {data.utilisation.split(`\n`).map((phrase, index) => (
+                        <p className="text-sm text-gray-700 mt-1" key={index}>
+                            {phrase}
+                        </p>
+                    ))}
+                </div>
+                <div>
                     <p className="text-xl text-primary tracking-tight text-gray-700 mt-10">
                         Composition du produit
                     </p>
@@ -101,9 +118,6 @@ export default async function ProductIdRoute({
                             {phrase}
                         </p>
                     ))}
-                    <form action={addProductShoppingCart}>
-                        <ShoppingBagButton />
-                    </form>
                 </div>
             </div>
 

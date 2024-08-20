@@ -82,7 +82,7 @@ export function ProductCard({ item }: Props) {
                 </div>
             </div>
             <p className="text-gray-600 text-sm mt-2 line-clamp-3">
-                {item.description}
+                {item.littledescription}
             </p>
             <div className="absolute w-full bottom-0">
                 <Button asChild className="w-full mt-5">
