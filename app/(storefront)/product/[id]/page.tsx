@@ -1,4 +1,9 @@
-import { addIten } from "@/app/actions";
+import {
+    addIten100,
+    addIten2,
+    addIten5,
+    addIten50,
+} from "@/app/actions";
 import { FeaturedProducts } from "@/app/components/storefront/FeatureProducts";
 import { ImageSlider } from "@/app/components/storefront/ImageSlider";
 import { ShoppingBagButton } from "@/app/components/SubmitButtons";
@@ -40,7 +45,11 @@ export default async function ProductIdRoute({
     params: { id: string };
 }) {
     const data = await getData(params.id);
-    const addProductShoppingCart = addIten.bind(null, data.id);
+
+    const addProductShoppingCart50 = addIten50.bind(null, data.id);
+    const addProductShoppingCart100 = addIten100.bind(null, data.id);
+    const addProductShoppingCart2 = addIten2.bind(null, data.id);
+    const addProductShoppingCart5 = addIten5.bind(null, data.id);
 
     return (
         <>
@@ -92,16 +101,35 @@ export default async function ProductIdRoute({
                             {phrase}
                         </p>
                     ))}
-                    <form action={addProductShoppingCart}>
-                        <ShoppingBagButton />
-                    </form>
+                    <div className="mt-5">
+                        {data.price50 && (
+                            <form action={addProductShoppingCart50}>
+                                <ShoppingBagButton text="+1 bouteille de 50ml" />
+                            </form>
+                        )}
+                        {data.price100 && (
+                            <form action={addProductShoppingCart100}>
+                                <ShoppingBagButton text="+1 bouteille de 100ml" />
+                            </form>
+                        )}
+                        {data.price2 && (
+                            <form action={addProductShoppingCart2}>
+                                <ShoppingBagButton text="+1 bouteille de 2.5ml" />
+                            </form>
+                        )}
+                        {data.price5 && (
+                            <form action={addProductShoppingCart5}>
+                                <ShoppingBagButton text="+1 bouteille de 5ml" />
+                            </form>
+                        )}
+                    </div>
                 </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start lg:gap-x-24">
                 <div>
                     <p className="text-xl text-primary tracking-tight text-gray-700 mt-10">
-                        Utilsation du produit
+                        Utilisation du produit
                     </p>
                     {data.utilisation.split(`\n`).map((phrase, index) => (
                         <p className="text-sm text-gray-700 mt-1" key={index}>

@@ -33,7 +33,10 @@ export type Cart = {
         price100: number;
         price2: number;
         price5: number;
-        quantity: number;
+        quantity50: number;
+        quantity100: number;
+        quantity2: number;
+        quantity5: number;
         imageString: string
     }>
 }

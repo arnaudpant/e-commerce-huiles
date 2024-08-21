@@ -22,9 +22,10 @@ export default async function BagRoute() {
 
     cart?.items.forEach((item) => {
         totalPrice +=
-            item.price50 * item.quantity +
-            item.price100 * item.quantity +
-            item.price5 * item.quantity;
+            item.price50 * item.quantity50 +
+            item.price100 * item.quantity100 +
+            item.price5 * item.quantity5 +
+            item.price2 * item.quantity2;
     });
 
     return (
@@ -33,8 +34,8 @@ export default async function BagRoute() {
                 <div className="flex min-h-[400px] flex-col items-center justify-center rounded-lg border border-dashed p-8 text-center mt-20">
                     <div className="flex h-20 w-20 items-center justify-center rounded-full bg-primary/10">
                         <ShoppingBag className="w-10 h-10 text-primary" />
-                    </div> 
-                    
+                    </div>
+
                     <h2 className="text-xl font-semibold mt-6 mb-10">
                         Votre panier est vide !
                     </h2>
@@ -60,11 +61,31 @@ export default async function BagRoute() {
                             </div>
                             <div className="ml-5 flex justify-between w-full font-medium">
                                 <p>{item.name}</p>
-                                <div className="flex flex-col h-full justify-between">
-                                    <div className="flex items-center justify-end gap-x-2">
-                                        <p>{item.quantity} x</p>
-                                        <p>{item.price100} €</p>
-                                    </div>
+                                <div className="flex flex-col h-full justify-between gap-5">
+                                    {item.quantity50 > 0 && (
+                                        <div className="flex items-center justify-end gap-x-2">
+                                            <p>{item.quantity50} x</p>
+                                            <p>{item.price50} €</p>
+                                        </div>
+                                    )}
+                                    {item.quantity100 > 0 && (
+                                        <div className="flex items-center justify-end gap-x-2">
+                                            <p>{item.quantity100} x</p>
+                                            <p>{item.price100} €</p>
+                                        </div>
+                                    )}
+                                    {item.quantity2 > 0 && (
+                                        <div className="flex items-center justify-end gap-x-2">
+                                            <p>{item.quantity2} x</p>
+                                            <p>{item.price2} €</p>
+                                        </div>
+                                    )}
+                                    {item.quantity5 > 0 && (
+                                        <div className="flex items-center justify-end gap-x-2">
+                                            <p>{item.quantity5} x</p>
+                                            <p>{item.price5} €</p>
+                                        </div>
+                                    )}
                                     <div>
                                         <form action={deletedItem}>
                                             <input

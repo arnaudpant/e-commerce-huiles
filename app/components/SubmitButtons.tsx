@@ -34,8 +34,11 @@ export function SubmitButtons({ text, variant }: SubmitButtonsProps) {
     );
 }
 
-export function ShoppingBagButton(){
-    const { pending } = useFormStatus()
+type TextShoppingBagType = {
+    text: string
+}
+export function ShoppingBagButton({ text }: TextShoppingBagType) {
+    const { pending } = useFormStatus();
 
     return (
         <>
@@ -47,7 +50,7 @@ export function ShoppingBagButton(){
             ) : (
                 <Button size="lg" className="w-full mt-10" type="submit">
                     <ShoppingBag className="mr-4 h-5 w-5" />
-                    Ajouter au panier
+                    {text}
                 </Button>
             )}
         </>
