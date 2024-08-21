@@ -21,7 +21,7 @@ import {
 import { Switch } from "@/app/components/ui/switch";
 import { Textarea } from "@/app/components/ui/textarea";
 import { UploadDropzone } from "@/app/lib/uploadthing";
-import { ChevronLeft, Key, XIcon } from "lucide-react";
+import { ChevronLeft, XIcon } from "lucide-react";
 import Link from "next/link";
 import { useFormState } from "react-dom";
 import { toast } from "react-toastify";

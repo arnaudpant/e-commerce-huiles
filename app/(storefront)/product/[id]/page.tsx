@@ -89,7 +89,7 @@ export default async function ProductIdRoute({
                         Description du produit
                     </p>
                     {data.description.split(`\n`).map((phrase, index) => (
-                        <p className="text-sm text-gray-700 mt-1" key={index}>
+                        <p className="text-sm text-gray-700 pt-1" key={index}>
                             {phrase}
                         </p>
                     ))}
@@ -97,31 +97,34 @@ export default async function ProductIdRoute({
                         Informations du produit
                     </p>
                     {data.information.split(`\n`).map((phrase, index) => (
-                        <p className="text-sm text-gray-700 mt-1" key={index}>
+                        <p className="text-sm text-gray-700 pt-2" key={index}>
                             {phrase}
                         </p>
                     ))}
                     <div className="mt-5">
-                        {data.price50 && (
+                        {data.price50 > 0 && (
                             <form action={addProductShoppingCart50}>
                                 <ShoppingBagButton text="+1 bouteille de 50ml" />
                             </form>
                         )}
-                        {data.price100 && (
+                        {data.price100 > 0 && (
                             <form action={addProductShoppingCart100}>
                                 <ShoppingBagButton text="+1 bouteille de 100ml" />
                             </form>
                         )}
-                        {data.price2 && (
+                        {data.price2 > 0 && (
                             <form action={addProductShoppingCart2}>
                                 <ShoppingBagButton text="+1 bouteille de 2.5ml" />
                             </form>
                         )}
-                        {data.price5 && (
+                        {data.price5 > 0 && (
                             <form action={addProductShoppingCart5}>
                                 <ShoppingBagButton text="+1 bouteille de 5ml" />
                             </form>
                         )}
+                        {
+                            data.option250 && (<p className="pb-2 pt-4 text-xs text-gray-500">* Conditionnement par bouteille de 250ml possible sur demande</p>)
+                        }
                     </div>
                 </div>
             </div>
@@ -132,7 +135,7 @@ export default async function ProductIdRoute({
                         Utilisation du produit
                     </p>
                     {data.utilisation.split(`\n`).map((phrase, index) => (
-                        <p className="text-sm text-gray-700 mt-1" key={index}>
+                        <p className="text-sm text-gray-700 pt-1" key={index}>
                             {phrase}
                         </p>
                     ))}
@@ -142,7 +145,7 @@ export default async function ProductIdRoute({
                         Composition du produit
                     </p>
                     {data.composition.split(`\n`).map((phrase, index) => (
-                        <p className="text-sm text-gray-700 mt-1" key={index}>
+                        <p className="text-sm text-gray-700 pt-1" key={index}>
                             {phrase}
                         </p>
                     ))}

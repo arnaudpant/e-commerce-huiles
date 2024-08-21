@@ -41,7 +41,7 @@ export async function createProduct(prevState: unknown, formData: FormData) {
             price100: submission.value.price100,
             price2: submission.value.price2,
             price5: submission.value.price5,
-            option250: submission.value.stock === true ? true : false,
+            option250: submission.value.option250 === true ? true : false,
             images: flatUrlsImages,
             category: submission.value.category,
             stock: submission.value.stock === true ? true : false,
@@ -86,7 +86,7 @@ export async function editProduct(prevState: any, formData: FormData) {
             price100: submission.value.price100,
             price2: submission.value.price2,
             price5: submission.value.price5,
-            option250: submission.value.stock === true ? true : false,
+            option250: submission.value.option250 === true ? true : false,
             images: flatUrlsImages,
             category: submission.value.category,
             stock: submission.value.stock === true ? true : false,
@@ -156,89 +156,6 @@ export async function deleteBanner(formData: FormData) {
     redirect("/dashboard/banner")
 }
 
-// export async function addIten(productId: string) {
-//     const { getUser } = getKindeServerSession();
-//     const user = await getUser()
-
-//     if(!user) {
-//         return redirect("/")
-//     }
-
-//     let cart: Cart | null = await redis.get(`cart-${user.id}`)
-
-//     const selectedProduct = await prisma.product.findUnique({
-//         select: {
-//             id: true,
-//             name: true,
-//             price50: true,
-//             price100: true,
-//             price2: true,
-//             price5: true,
-//             images: true,
-//         },
-//         where: {
-//             id: productId
-//         }
-//     })
-
-//     if (!selectedProduct) {
-//         throw new Error("Pas de produit avec cet ID")
-//     }
-
-//     let myCart = {} as Cart
-
-//     /** Creation d'une Cart si non existante */
-//     if(!cart || !cart.items) {
-//         myCart = {
-//             userId: user.id,
-//             items: [
-//                 {
-//                     price50: selectedProduct.price50,
-//                     price100: selectedProduct.price100,
-//                     price2: selectedProduct.price2,
-//                     price5: selectedProduct.price5,
-//                     name: selectedProduct.name,
-//                     id: selectedProduct.id,
-//                     imageString: selectedProduct.images[0],
-//                     quantity100: 0,
-//                     quantity2: 0,
-//                     quantity5: 0,
-//                     quantity50: 0
-//                 }
-//             ]
-//         }
-//     } 
-//     else /** Sinon Cart existante */
-//     {
-//         let itemFound = false
-//         /** Si produit deja dans la Cart = quantity +1 */
-//         myCart.items = cart.items.map((item) => {
-//             if(item.id === productId) {
-//                 itemFound = true
-//                 item.quantity50 += 1
-//             }
-//             return item
-//         })
-//         /** Si produit non dans la Cart = Ajout en quantity 1 */
-//         if (!itemFound) {
-//             myCart.items.push({
-//                 price50: selectedProduct.price50,
-//                 price100: selectedProduct.price100,
-//                 price2: selectedProduct.price2,
-//                 price5: selectedProduct.price5,
-//                 name: selectedProduct.name,
-//                 id: selectedProduct.id,
-//                 imageString: selectedProduct.images[0],
-//                 quantity50: 0,
-//                 quantity100: 0,
-//                 quantity2: 0,
-//                 quantity5: 0
-//             })
-//         }
-//     }
-//     await redis.set(`cart-${user.id}`, myCart)
-//     revalidatePath("/", "layout")
-// }
 
 /** 
 ** 50ml  

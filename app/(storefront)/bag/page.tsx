@@ -64,25 +64,45 @@ export default async function BagRoute() {
                                 <div className="flex flex-col h-full justify-between gap-5">
                                     {item.quantity50 > 0 && (
                                         <div className="flex items-center justify-end gap-x-2">
-                                            <p>{item.quantity50} x</p>
+                                            <p>
+                                                <span className="text-gray-400 pr-2">
+                                                    50ml:
+                                                </span>
+                                                {item.quantity50} x
+                                            </p>
                                             <p>{item.price50} €</p>
                                         </div>
                                     )}
                                     {item.quantity100 > 0 && (
                                         <div className="flex items-center justify-end gap-x-2">
-                                            <p>{item.quantity100} x</p>
+                                            <p>
+                                                <span className="text-gray-400 pr-2">
+                                                    100ml:
+                                                </span>
+                                                {item.quantity100} x
+                                            </p>
                                             <p>{item.price100} €</p>
                                         </div>
                                     )}
                                     {item.quantity2 > 0 && (
                                         <div className="flex items-center justify-end gap-x-2">
-                                            <p>{item.quantity2} x</p>
+                                            <p>
+                                                <span className="text-gray-400 pr-2">
+                                                    2.5ml:
+                                                </span>
+                                                {item.quantity2} x
+                                            </p>
                                             <p>{item.price2} €</p>
                                         </div>
                                     )}
                                     {item.quantity5 > 0 && (
                                         <div className="flex items-center justify-end gap-x-2">
-                                            <p>{item.quantity5} x</p>
+                                            <p>
+                                                <span className="text-gray-400 pr-2">
+                                                    5ml:
+                                                </span>
+                                                {item.quantity5} x
+                                            </p>
                                             <p>{item.price5} €</p>
                                         </div>
                                     )}
