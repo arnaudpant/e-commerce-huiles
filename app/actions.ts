@@ -8,6 +8,8 @@ import prisma from "./lib/db";
 import { redis } from "./lib/redis";
 import { Cart } from "./lib/type";
 import { revalidatePath } from "next/cache";
+import { stripe } from "./lib/stripe";
+import Stripe from "stripe";
 
 
 export async function createProduct(prevState: unknown, formData: FormData) {
@@ -50,7 +52,7 @@ export async function createProduct(prevState: unknown, formData: FormData) {
     })
 
     redirect("/dashboard/products")
-} 
+}
 
 export async function editProduct(prevState: any, formData: FormData) {
     const { getUser } = getKindeServerSession();
@@ -161,7 +163,7 @@ export async function deleteBanner(formData: FormData) {
 
 /** 
 ** 50ml  
-*/ 
+*/
 export async function addIten50(productId: string) {
     const { getUser } = getKindeServerSession();
     const user = await getUser()
@@ -516,7 +518,7 @@ export async function deletedItem(formData: FormData) {
 
     let cart: Cart | null = await redis.get(`cart-${user.id}`)
 
-    if(cart && cart.items) {
+    if (cart && cart.items) {
         const updateCart: Cart = {
             userId: user.id,
             items: cart.items.filter((item) => item.id !== productId)
@@ -525,4 +527,41 @@ export async function deletedItem(formData: FormData) {
     }
 
     revalidatePath('/bag')
+}
+
+/**
+** STRIPE
+*/
+
+export async function checkOut() {
+    const { getUser } = getKindeServerSession();
+    const user = await getUser()
+
+    if (!user || user === null || user.id !== "kp_c1eaeaf06ad04886870c4f0a12e182d1") {
+        return redirect("/")
+    }
+    let cart: Cart | null = await redis.get(`cart-${user.id}`)
+
+    if (cart && cart.items) {
+        const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = cart.items.map((item) => (
+            {
+                price_data: {
+                    currency: 'eur',
+                    unit_amount: (item.price50 * item.quantity50 + item.price100 * item.quantity100 + item.price2 * item.quantity2 + item.price5 * item.quantity5) * 100,
+                    product_data: {
+                        name: item.name,
+                        images: [item.imageString]
+                    }
+                },
+                quantity: 1
+            }))
+
+        const session = await stripe.checkout.sessions.create({
+            mode: 'payment',
+            line_items: lineItems,
+            success_url: 'http://localhost:3000/payment/success',
+            cancel_url: 'http://localhost:3000/payment/cancel'
+        })
+        return redirect(session.url as string)
+    }
 }
