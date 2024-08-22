@@ -41,6 +41,7 @@ model Product {
   images String[]
   category Category
   stock Boolean @default(false)
+  vedette Boolean @default(false)
 
   createdAt DateTime @default(now())
 }

@@ -49,6 +49,7 @@ interface DataProps {
         price5: number;
         option250: boolean;
         stock: boolean;
+        vedette: boolean;
         images: string[];
         category:
             | "huileVegetale"
@@ -287,6 +288,15 @@ export function EditForm({data}: DataProps) {
                                 key={fields.stock.key}
                                 name={fields.stock.name}
                                 defaultChecked={data.stock}
+                            />
+                        </div>
+                        {/* VEDETTE */}
+                        <div className="flex flex-col gap-3">
+                            <Label>En vedette</Label>
+                            <Switch
+                                key={fields.vedette.key}
+                                name={fields.vedette.name}
+                                defaultChecked={data.vedette}
                             />
                         </div>
                         {/* STATUS */}

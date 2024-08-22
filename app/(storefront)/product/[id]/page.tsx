@@ -28,6 +28,7 @@ async function getData(productId: string) {
             price2: true,
             price5: true,
             option250: true,
+            vedette: true,
             images: true,
             category: true,
             stock: true,

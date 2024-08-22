@@ -11,6 +11,7 @@ export type ProductType = {
     price2: number,
     price5: number,
     option250: boolean,
+    vedette: boolean,
     images: string[],
     category: CategoryHuileType,
     stock: boolean

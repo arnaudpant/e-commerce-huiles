@@ -65,6 +65,7 @@ export default async function Products() {
                                 <TableHead>Prix 2ml</TableHead>
                                 <TableHead>Prix 5ml</TableHead>
                                 <TableHead>250ml</TableHead>
+                                <TableHead>Vedette</TableHead>
                                 <TableHead>Date</TableHead>
                                 <TableHead>Status</TableHead>
                                 <TableHead className="text-end">
@@ -110,6 +111,9 @@ export default async function Products() {
                                     </TableCell>
                                     <TableCell>
                                         {item.option250 ? "250ml" : "X"}
+                                    </TableCell>
+                                    <TableCell>
+                                        {item.vedette ? "O" : "N"}
                                     </TableCell>
                                     <TableCell>
                                         {new Intl.DateTimeFormat(

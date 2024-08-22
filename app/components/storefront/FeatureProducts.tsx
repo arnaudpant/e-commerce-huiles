@@ -23,6 +23,7 @@ async function getData() {
             price5: true,
             price2: true,
             option250: true,
+            vedette: true,
             images: true,
             category: true,
             stock: true,
@@ -53,7 +54,7 @@ async function LoadingFeaturedProducts() {
     const data = await getData();
     return (
         <div className="mt-5 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
-            {data.map((item) => (
+            {data.filter((product) => product.vedette === true).map((item) => (
                 <ProductCard key={item.id} item={item} />
             ))}
         </div>

@@ -276,6 +276,15 @@ export default function ProductCreateRoute() {
                                 defaultValue={fields.stock.initialValue}
                             />
                         </div>
+                        {/* VEDETTE */}
+                        <div className="flex flex-col gap-3">
+                            <Label>En vedette</Label>
+                            <Switch
+                                key={fields.vedette.key}
+                                name={fields.vedette.name}
+                                defaultValue={fields.vedette.initialValue}
+                            />
+                        </div>
                         {/* STATUS */}
                         <div className="flex flex-col gap-3">
                             <Label>Status de la publication</Label>
