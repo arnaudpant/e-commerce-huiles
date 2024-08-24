@@ -1,5 +1,5 @@
 import prisma from "@/app/lib/db";
-import { Avatar, AvatarFallback } from "../ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import {
     Card,
     CardContent,
@@ -48,46 +48,28 @@ export async function RecentSales() {
                     <CardTitle>Ventes récentes</CardTitle>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-8">
-                    <div className="flex items-center gap-4">
-                        <Avatar className="hidden sm:flex h-9 w-9">
-                            <AvatarFallback>JD</AvatarFallback>
-                        </Avatar>
-                        <div className="grid gap-1">
-                            <p className="text-sm font-medium">John DOE</p>
-                            <p className="text-sm to-muted-foreground">
-                                test@test.fr
-                            </p>
+                    {data.map((item) => (
+                        <div key={item.id} className="flex items-center gap-4">
+                            <Avatar className="hidden sm:flex h-9 w-9">
+                                <AvatarImage src={item.User?.profileImage} alt="Avatar image" />
+                                <AvatarFallback>
+                                    {item.User?.firstName
+                                        .slice(0, 2)
+                                        .toUpperCase()}
+                                </AvatarFallback>
+                            </Avatar>
+                            <div className="grid gap-1">
+                                <p className="text-sm font-medium">
+                                    {item.User?.firstName}{" "}
+                                    {item.User?.lastName}
+                                </p>
+                                <p className="text-sm to-muted-foreground">
+                                    {item.User?.email}
+                                </p>
+                            </div>
+                            <p className="ml-auto font-medium">{new Intl.NumberFormat('fr-FR').format(item.amount / 100)}€</p>
                         </div>
-                        <p className="ml-auto font-medium">35€</p>
-                    </div>
-                </CardContent>
-                <CardContent className="flex flex-col gap-8">
-                    <div className="flex items-center gap-4">
-                        <Avatar className="hidden sm:flex h-9 w-9">
-                            <AvatarFallback>JD</AvatarFallback>
-                        </Avatar>
-                        <div className="grid gap-1">
-                            <p className="text-sm font-medium">John DOE</p>
-                            <p className="text-sm to-muted-foreground">
-                                test@test.fr
-                            </p>
-                        </div>
-                        <p className="ml-auto font-medium">35€</p>
-                    </div>
-                </CardContent>
-                <CardContent className="flex flex-col gap-8">
-                    <div className="flex items-center gap-4">
-                        <Avatar className="hidden sm:flex h-9 w-9">
-                            <AvatarFallback>JD</AvatarFallback>
-                        </Avatar>
-                        <div className="grid gap-1">
-                            <p className="text-sm font-medium">John DOE</p>
-                            <p className="text-sm to-muted-foreground">
-                                test@test.fr
-                            </p>
-                        </div>
-                        <p className="ml-auto font-medium">35€</p>
-                    </div>
+                    ))}
                 </CardContent>
             </Card>
         </div>
