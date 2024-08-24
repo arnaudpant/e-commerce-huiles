@@ -3,7 +3,7 @@ import { Card } from "@/app/components/ui/card";
 import { Check } from "lucide-react";
 import Link from "next/link";
 
-export function SuccessRoute() {
+export default function SuccessRoute() {
     return (
         <section className="w-full min-h-[80vh] flex items-center justify-center">
             <Card className="w-[350px]">

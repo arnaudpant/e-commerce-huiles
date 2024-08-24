@@ -1,8 +1,33 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/app/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/app/components/ui/table";
+import prisma from "@/app/lib/db";
 
+async function getData() {
+    const data = await prisma.order.findMany({
+        select: {
+            amount: true,
+            createdAt: true,
+            id: true,
+            status: true,
+            User: {
+                select: {
+                    firstName: true,
+                    lastName: true,
+                    email: true,
+                    profileImage: true,
+                    adresse: true,
+                },
+            },
+        },
+        orderBy: {
+            createdAt: "desc"
+        }
+    });
+    return data
+}
 
-export default function OrdersPage() {
+export default async function OrdersPage() {
+    const data = await getData()
     return (
         <Card>
             <CardHeader className="px-7">
@@ -13,8 +38,9 @@ export default function OrdersPage() {
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            <TableHead>Clients</TableHead>
-                            <TableHead>Type</TableHead>
+                            <TableHead>Noms</TableHead>
+                            <TableHead>Prénoms</TableHead>
+                            <TableHead>Email</TableHead>
                             <TableHead>Status</TableHead>
                             <TableHead>Date</TableHead>
                             <TableHead className="text-right">
@@ -23,15 +49,22 @@ export default function OrdersPage() {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        <TableRow>
+                        {
+                            data.length > 0 &&
+                            data.map((item) => (
+                        <TableRow key={item.id}>
                             <TableCell>
-                                <p className="font-medium">John Doe</p>
+                                <p className="font-medium">{item.User?.firstName}</p>
                             </TableCell>
-                            <TableCell>type</TableCell>
-                            <TableCell>En cours</TableCell>
-                            <TableCell>10/02/2024</TableCell>
-                            <TableCell className="text-right">35€</TableCell>
+                            <TableCell>{item.User?.lastName}</TableCell>
+                            <TableCell>{item.User?.email}</TableCell>
+                            <TableCell>{item.status}</TableCell>
+                            <TableCell>{new Intl.DateTimeFormat("fr-FR").format(item.createdAt)}</TableCell>
+                            <TableCell className="text-right">{new Intl.NumberFormat("fr-FR").format(item.amount)}</TableCell>
                         </TableRow>
+
+                            ))
+                        }
                     </TableBody>
                 </Table>
             </CardContent>

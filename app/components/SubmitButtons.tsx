@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useFormStatus } from "react-dom";
 import { Button } from "@/app/components/ui/button";
@@ -35,8 +35,8 @@ export function SubmitButtons({ text, variant }: SubmitButtonsProps) {
 }
 
 type TextShoppingBagType = {
-    text: string
-}
+    text: string;
+};
 export function ShoppingBagButton({ text }: TextShoppingBagType) {
     const { pending } = useFormStatus();
 
@@ -67,9 +67,31 @@ export function DeleteItemBag() {
                     Suppression en cours ...
                 </button>
             ) : (
-                <button type="submit" className="text-red-600 font-medium text-end hover:bg-gray-100/50 py-1 px-2 rounded-md">
+                <button
+                    type="submit"
+                    className="text-red-600 font-medium text-end hover:bg-gray-100/50 py-1 px-2 rounded-md"
+                >
                     Supprimer
                 </button>
+            )}
+        </>
+    );
+}
+
+export function CheckoutButton() {
+    const { pending } = useFormStatus();
+    return (
+        <>
+            {pending ? (
+                <Button disabled size="lg" className="w-full mt-10">
+                    <Loader2 className="mr-4 h-5 w-5 animate-spin" />
+                    Veuillez patienter
+                </Button>
+            ) : (
+                <Button size="lg" className="w-full mt-10" type="submit">
+                    <ShoppingBag className="mr-4 h-5 w-5" />
+                    Commander
+                </Button>
             )}
         </>
     );
