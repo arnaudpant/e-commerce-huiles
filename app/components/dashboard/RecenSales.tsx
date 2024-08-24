@@ -7,6 +7,7 @@ import {
     CardHeader,
     CardTitle,
 } from "../ui/card";
+import { Charts } from "./Charts";
 
 async function getData() {
     const data = await prisma.order.findMany({
@@ -35,14 +36,6 @@ export async function RecentSales() {
     const data = await getData();
     return (
         <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3 mt-10">
-            <Card className="xl:col-span-2">
-                <CardHeader className="flex flex-row items-center justify-between pb-2">
-                    <CardTitle>Transactions</CardTitle>
-                    <CardDescription>
-                        Transactions récentes de votre boutique
-                    </CardDescription>
-                </CardHeader>
-            </Card>
             <Card>
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
                     <CardTitle>Ventes récentes</CardTitle>
