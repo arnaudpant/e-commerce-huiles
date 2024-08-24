@@ -3,7 +3,7 @@ import DashboardNavigation from "../components/dashboard/DashboardNavigation";
 import { Sheet, SheetContent, SheetTrigger } from "../components/ui/sheet";
 import { Button } from "../components/ui/button";
 import { CircleUser, MenuIcon } from "lucide-react";
-
+// import { unstable_noStore as noStore } from "next/cache";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -24,6 +24,7 @@ export default async function DashboardLayout({
 }: {
     children: ReactNode;
 }) {
+    // noStore()
     const { getUser } = getKindeServerSession();
     const user = await getUser();
 

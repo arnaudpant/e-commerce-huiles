@@ -9,8 +9,10 @@ import { ImageSlider } from "@/app/components/storefront/ImageSlider";
 import { ShoppingBagButton } from "@/app/components/SubmitButtons";
 import prisma from "@/app/lib/db";
 import { notFound } from "next/navigation";
+import { unstable_noStore as noStore } from "next/cache";
 
 async function getData(productId: string) {
+    noStore()
     const data = await prisma.product.findUnique({
         where: {
             id: productId,

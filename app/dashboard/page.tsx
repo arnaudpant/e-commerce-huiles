@@ -1,8 +1,10 @@
-import { Charts } from "../components/dashboard/Charts";
 import { DashboardStats } from "../components/dashboard/DashboardStats";
 import { RecentSales } from "../components/dashboard/RecenSales";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
-import prisma from "../lib/db";
+// import { Charts } from "../components/dashboard/Charts";
+// import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
+// import prisma from "../lib/db";
+// import { unstable_noStore as noStore } from "next/cache";
+
 
 // async function getData() {
 //     const now = new Date();
@@ -32,6 +34,7 @@ import prisma from "../lib/db";
 //     return result;
 // }
 export default async function Dasboard() {
+    // noStore()
     //const data = await getData()
     return (
         <>
