@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import allProducts from "/public/Bouteilles/Huile vierge de colza 1.jpeg";
-import huileVegetale from "/public/Bouteilles/Huile vierge de colza 2.jpeg";
-import graisseVegetale from "/public/Bouteilles/Beurre vierge de Noix de Karité.jpeg";
+import allProducts from "/public/allproducts.jpeg";
+import huileVegetale from "/public/huilevegetale.jpeg";
+import graisseVegetale from "/public/graissevegetale.jpeg";
 
 export function CategoriesSelection() {
     return (
