@@ -3,7 +3,7 @@ import { Card } from "@/app/components/ui/card";
 import { Recycle } from "lucide-react";
 import Link from "next/link";
 
-export function NoProductsRoute() {
+export default function NoProductsRoute() {
     return (
         <section className="w-full min-h-[80vh] flex items-center justify-center">
             <Card className="w-[350px]">

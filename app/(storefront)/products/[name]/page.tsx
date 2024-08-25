@@ -215,7 +215,9 @@ export default async function CategoriesPage({
 }) {
     noStore()
     const { data, title } = await getData(params.name);
-    data.length === 0 && redirect("/noproducts")
+    if(data.length === 0) {
+        redirect("/noproducts")
+    } 
     return (
         <section>
             <h1 className="font-semibold text-3xl my-5">{title}</h1>
