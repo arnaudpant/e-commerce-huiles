@@ -20,7 +20,8 @@ export function CategoriesSelection() {
             </div>
 
             <div className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-6 lg:gap-8">
-                <div className="group aspect-w-2 aspect-h-1 rounded-xl overflow-hidden sm:aspect-w-1 sm:row-span-2">
+                
+                <div className="aspect-w-2 aspect-h-1 rounded-xl overflow-hidden">
                     <Link href="/products/all">
                         <div>
                             <Image
@@ -29,7 +30,7 @@ export function CategoriesSelection() {
                                 className="object-cover object-center"
                             />
                             <div className="bg-gradient-to-b from-transparent to-black opacity-55" />
-                            <div className="p-6 flex flex-col items-start justify-end sm:absolute sm:inset-0">
+                            <div className="p-6 flex flex-col items-start justify-end absolute inset-0">
                                 <h3 className="text-white font-semibold">
                                     Tous les produits
                                 </h3>
@@ -43,7 +44,7 @@ export function CategoriesSelection() {
 
                 <div className="group aspect-w-2 aspect-h-1 rounded-xl overflow-hidden sm:relative sm:aspect-none sm:h-full">
                     <Link href="/products/huiles">
-                        <div>
+                        <div className="group aspect-w-2 aspect-h-1 rounded-xl overflow-hidden sm:relative sm:aspect-none sm:h-full">
                             <Image
                                 src={huileVegetale}
                                 alt="Image huile vegetale"

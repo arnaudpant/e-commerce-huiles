@@ -33,7 +33,7 @@ async function getData(productCategoriy: string) {
                 },
             });
             return {
-                title: "Toutes les huiles",
+                title: "Tous les produits",
                 data: data,
             };
         }

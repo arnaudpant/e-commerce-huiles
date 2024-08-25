@@ -9,6 +9,7 @@ async function getData() {
         where: {
             status: "published",
             stock: true,
+            vedette: true
         },
         select: {
             id: true,
@@ -56,7 +57,7 @@ async function LoadingFeaturedProducts() {
     const data = await getData();
     return (
         <div className="mt-5 grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-5">
-            {data.filter((product) => product.vedette === true).map((item) => (
+            {data.map((item) => (
                 <ProductCard key={item.id} item={item} />
             ))}
         </div>

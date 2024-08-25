@@ -28,7 +28,7 @@ export async function Navbar() {
             <div className="flex items-center">
                 <Link href="/">
                     <h1 className="text-black font-bold text-xl lg:text-3xl">
-                        HuilesVak
+                        HuilesBio
                     </h1>
                 </Link>
                 {user?.id === "kp_c1eaeaf06ad04886870c4f0a12e182d1" ? (
@@ -55,7 +55,7 @@ export async function Navbar() {
                             name={user.given_name as string}
                             userImage={
                                 user.picture ??
-                                `https://avatar.vercel.sh/${user.given_name}`
+                                '/public/avatar.png'
                             }
                         />
                     </>
