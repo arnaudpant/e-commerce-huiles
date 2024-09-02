@@ -41,3 +41,11 @@ export type Cart = {
         imageString: string
     }>
 }
+
+export type ProductCategory =
+    | "all"
+    | "huiles"
+    | "graisses"
+    | "huilescomposees"
+    | "huilesaromatiques"
+    | "huilesessentielles";

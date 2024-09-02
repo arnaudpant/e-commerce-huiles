@@ -3,28 +3,30 @@ import prisma from "@/app/lib/db";
 import { notFound, redirect } from "next/navigation";
 import { unstable_noStore as noStore } from "next/cache";
 
-async function getData(productCategoriy: string) {
-    switch (productCategoriy) {
+const PRODUCT_SELECT = {
+    id: true,
+    name: true,
+    description: true,
+    littledescription: true,
+    information: true,
+    composition: true,
+    utilisation: true,
+    status: true,
+    price50: true,
+    price100: true,
+    price2: true,
+    price5: true,
+    option250: true,
+    images: true,
+    category: true,
+    stock: true,
+} as const;
+
+async function getData(productCategory: string) {
+    switch (productCategory) {
         case "all": {
             const data = await prisma.product.findMany({
-                select: {
-                    id: true,
-                    name: true,
-                    description: true,
-                    littledescription: true,
-                    information: true,
-                    composition: true,
-                    utilisation: true,
-                    status: true,
-                    price50: true,
-                    price100: true,
-                    price2: true,
-                    price5: true,
-                    option250: true,
-                    images: true,
-                    category: true,
-                    stock: true,
-                },
+                select: PRODUCT_SELECT,
                 where: {
                     status: "published",
                 },
@@ -43,24 +45,7 @@ async function getData(productCategoriy: string) {
                     status: "published",
                     category: "huileVegetale",
                 },
-                select: {
-                    id: true,
-                    name: true,
-                    description: true,
-                    littledescription: true,
-                    information: true,
-                    composition: true,
-                    utilisation: true,
-                    status: true,
-                    price50: true,
-                    price100: true,
-                    price2: true,
-                    price5: true,
-                    option250: true,
-                    images: true,
-                    category: true,
-                    stock: true,
-                },
+                select: PRODUCT_SELECT,
                 orderBy: {
                     createdAt: "desc",
                 },
@@ -76,24 +61,7 @@ async function getData(productCategoriy: string) {
                     status: "published",
                     category: "graisseVegetalePure",
                 },
-                select: {
-                    id: true,
-                    name: true,
-                    description: true,
-                    littledescription: true,
-                    information: true,
-                    composition: true,
-                    utilisation: true,
-                    status: true,
-                    price50: true,
-                    price100: true,
-                    price2: true,
-                    price5: true,
-                    option250: true,
-                    images: true,
-                    category: true,
-                    stock: true,
-                },
+                select: PRODUCT_SELECT,
                 orderBy: {
                     createdAt: "desc",
                 },
@@ -109,24 +77,7 @@ async function getData(productCategoriy: string) {
                     status: "published",
                     category: "huileVegetaleComposee",
                 },
-                select: {
-                    id: true,
-                    name: true,
-                    description: true,
-                    littledescription: true,
-                    information: true,
-                    composition: true,
-                    utilisation: true,
-                    status: true,
-                    price50: true,
-                    price100: true,
-                    price2: true,
-                    price5: true,
-                    option250: true,
-                    images: true,
-                    category: true,
-                    stock: true,
-                },
+                select: PRODUCT_SELECT,
                 orderBy: {
                     createdAt: "desc",
                 },
@@ -142,24 +93,7 @@ async function getData(productCategoriy: string) {
                     status: "published",
                     category: "huileAromatique",
                 },
-                select: {
-                    id: true,
-                    name: true,
-                    description: true,
-                    littledescription: true,
-                    information: true,
-                    composition: true,
-                    utilisation: true,
-                    status: true,
-                    price50: true,
-                    price100: true,
-                    price2: true,
-                    price5: true,
-                    option250: true,
-                    images: true,
-                    category: true,
-                    stock: true,
-                },
+                select: PRODUCT_SELECT,
                 orderBy: {
                     createdAt: "desc",
                 },
@@ -175,24 +109,7 @@ async function getData(productCategoriy: string) {
                     status: "published",
                     category: "huileEssentielle",
                 },
-                select: {
-                    id: true,
-                    name: true,
-                    description: true,
-                    littledescription: true,
-                    information: true,
-                    composition: true,
-                    utilisation: true,
-                    status: true,
-                    price50: true,
-                    price100: true,
-                    price2: true,
-                    price5: true,
-                    option250: true,
-                    images: true,
-                    category: true,
-                    stock: true,
-                },
+                select: PRODUCT_SELECT,
                 orderBy: {
                     createdAt: "desc",
                 },
@@ -213,11 +130,11 @@ export default async function CategoriesPage({
 }: {
     params: { name: string };
 }) {
-    noStore()
+    noStore();
     const { data, title } = await getData(params.name);
-    if(data.length === 0) {
-        redirect("/noproducts")
-    } 
+    if (data.length === 0) {
+        redirect("/noproducts");
+    }
     return (
         <section>
             <h1 className="font-semibold text-3xl my-5">{title}</h1>
